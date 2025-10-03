@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -12,6 +12,8 @@ const navLinks = [
 
 export default function Header() {
   const [activeSection, setActiveSection] = useState('home');
+  const [indicatorStyle, setIndicatorStyle] = useState({});
+  const navRef = useRef<HTMLUListElement>(null);
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
@@ -33,56 +35,52 @@ export default function Header() {
       { rootMargin: '-50% 0px -50% 0px' }
     );
 
-    navLinks.forEach((link) => {
-      const element = document.getElementById(link.id);
-      if (element) {
-        observer.observe(element);
-      }
+    document.querySelectorAll('section[id]').forEach((section) => {
+      observer.observe(section);
     });
-
-    // Special handling for the home section to be active when at the top
-    const homeElement = document.getElementById('home');
-    const homeObserver = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setActiveSection('home');
-        }
-      },
-      { threshold: 0.8 }
-    );
-
-    if (homeElement) {
-      homeObserver.observe(homeElement);
-    }
 
     return () => {
       observer.disconnect();
-      homeObserver.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (navRef.current) {
+      const activeLink = navRef.current.querySelector(`[data-nav-id="${activeSection}"]`) as HTMLElement;
+      if (activeLink) {
+        setIndicatorStyle({
+          left: `${activeLink.offsetLeft}px`,
+          width: `${activeLink.offsetWidth}px`,
+        });
+      }
+    }
+  }, [activeSection]);
 
   return (
     <header className="sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-3 my-4 rounded-xl bg-black/30 backdrop-blur-lg border border-white/20">
         <div className="flex items-center justify-center">
-          <ul className="flex items-center space-x-2 sm:space-x-4">
+          <ul ref={navRef} className="relative flex items-center space-x-2 sm:space-x-4">
             {navLinks.map((link) => (
               <li key={link.id}>
                 <a
                   href={`#${link.id}`}
+                  data-nav-id={link.id}
                   onClick={(e) => handleScroll(e, link.id)}
                   className={cn(
-                    'relative px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground',
-                    'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md'
+                    'relative px-3 py-2 text-sm font-medium transition-colors hover:text-foreground',
+                    'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md',
+                    activeSection === link.id ? 'text-foreground' : 'text-foreground/80'
                   )}
                 >
                   {link.name}
-                  {activeSection === link.id && (
-                    <span className="absolute inset-x-1 -bottom-1.5 h-0.5 bg-primary rounded-full" />
-                  )}
                 </a>
               </li>
             ))}
+            <span
+              className="absolute -bottom-1.5 h-0.5 bg-primary rounded-full transition-all duration-300 ease-in-out"
+              style={indicatorStyle}
+            />
           </ul>
         </div>
       </nav>
