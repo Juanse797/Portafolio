@@ -1,14 +1,19 @@
 import { Card, CardContent } from '../ui/card';
 import { ScrollReveal } from '../scroll-reveal';
-import { PythonIcon, PandasIcon, NumpyIcon } from '../icons';
-import { BrainCircuit, GitMerge } from 'lucide-react';
+import {
+  PythonIcon,
+  PandasIcon,
+  NumpyIcon,
+  SklearnIcon,
+  GitIcon,
+} from '../icons';
 
 const skillsList = [
   { name: 'Python', icon: PythonIcon },
   { name: 'Pandas', icon: PandasIcon },
   { name: 'NumPy', icon: NumpyIcon },
-  { name: 'Scikit-learn', icon: BrainCircuit },
-  { name: 'Git', icon: GitMerge },
+  { name: 'Scikit-learn', icon: SklearnIcon },
+  { name: 'Git', icon: GitIcon },
 ];
 
 export default function SkillsSection() {
