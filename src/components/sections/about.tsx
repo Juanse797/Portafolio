@@ -1,17 +1,9 @@
-import { sanityFetch } from '@/lib/sanity';
 import { ScrollReveal } from "../scroll-reveal";
-import type { About } from '@/types';
 
-const ABOUT_QUERY = `*[_type == "about" && _id == "about"][0]`;
-
-export default async function AboutSection() {
-  const about = await sanityFetch<About>({ query: ABOUT_QUERY });
-
-  const { heading, paragraph1, paragraph2 } = about || {
-    heading: 'About Me',
-    paragraph1: 'I am a passionate Machine Learning Engineer dedicated to building intelligent systems that solve real-world problems. My journey into the world of AI began with a fascination for data and its power to uncover hidden patterns. Today, I specialize in developing, deploying, and maintaining robust machine learning models, from natural language processing to computer vision.',
-    paragraph2: "I thrive on challenges and am constantly exploring new algorithms and technologies to push the boundaries of what's possible. My philosophy is to combine technical rigor with a creative, product-focused mindset to deliver solutions that are not only powerful but also practical and user-friendly."
-  };
+export default function AboutSection() {
+  const heading = 'About Me';
+  const paragraph1 = 'I am a passionate Machine Learning Engineer dedicated to building intelligent systems that solve real-world problems. My journey into the world of AI began with a fascination for data and its power to uncover hidden patterns. Today, I specialize in developing, deploying, and maintaining robust machine learning models, from natural language processing to computer vision.';
+  const paragraph2 = "I thrive on challenges and am constantly exploring new algorithms and technologies to push the boundaries of what's possible. My philosophy is to combine technical rigor with a creative, product-focused mindset to deliver solutions that are not only powerful but also practical and user-friendly.";
 
   return (
     <section id="about" className="py-20 sm:py-32 bg-background">
