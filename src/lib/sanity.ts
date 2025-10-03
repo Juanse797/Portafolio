@@ -16,16 +16,18 @@ function getSanityClient() {
   if (client) {
     return { client, builder };
   }
+  
   if (projectId && dataset && apiVersion) {
     client = createClient({
       projectId,
       dataset,
       apiVersion,
-      useCdn: false,
+      useCdn: process.env.NODE_ENV === 'production',
       token: token,
     });
     builder = imageUrlBuilder(client);
   }
+  
   return { client, builder };
 }
 
@@ -56,6 +58,7 @@ export async function sanityFetch<T>({
     console.warn('Sanity project ID/dataset is not configured. Skipping fetch. Returning empty array.');
     return [] as T;
   }
+
   return client.fetch<T>(query, params, {
     cache: 'force-cache',
     next: {
