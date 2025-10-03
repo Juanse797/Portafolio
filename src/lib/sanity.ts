@@ -78,9 +78,9 @@ export async function sanityFetch<T>({
   }
   
   return currentClient.fetch<T>(query, params, {
-    cache: 'force-cache',
+    // Replaced cache strategy to allow more dynamic fetching
     next: {
-      revalidate: process.env.NODE_ENV === 'development' ? 30 : 3600,
+      revalidate: process.env.NODE_ENV === 'development' ? 5 : 60, // Shorter revalidation time
       tags,
     },
   });
