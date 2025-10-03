@@ -35,16 +35,8 @@ export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModa
     };
 
     if (isOpen) {
-      document.body.classList.remove('hide-cursor');
       fetchSummary();
-    } else {
-      document.body.classList.add('hide-cursor');
     }
-
-    // Cleanup function to ensure the cursor is shown when the component unmounts
-    return () => {
-      document.body.classList.add('hide-cursor');
-    };
   }, [isOpen, project.description]);
 
   const memoizedMarkdown = useMemo(() => (
