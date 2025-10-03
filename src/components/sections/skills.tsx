@@ -3,13 +3,13 @@ import { Card, CardContent } from '../ui/card';
 import { ScrollReveal } from '../scroll-reveal';
 
 const skillsList = [
-  { name: 'Python', iconUrl: 'https://profilinator.rishav.dev/skills-assets/python-original.svg' },
-  { name: 'Pandas', iconUrl: 'https://profilinator.rishav.dev/skills-assets/pandas-original-wordmark.svg' },
-  { name: 'NumPy', iconUrl: 'https://profilinator.rishav.dev/skills-assets/numpy-original-wordmark.svg' },
-  { name: 'TensorFlow', iconUrl: 'https://profilinator.rishav.dev/skills-assets/tensorflow-original.svg' },
-  { name: 'Scikit-learn', iconUrl: 'https://profilinator.rishav.dev/skills-assets/scikitlearn-original.svg' },
-  { name: 'Docker', iconUrl: 'https://profilinator.rishav.dev/skills-assets/docker-original-wordmark.svg' },
-  { name: 'Git', iconUrl: 'https://profilinator.rishav.dev/skills-assets/git-original-wordmark.svg' },
+  { name: 'Python', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/python.svg' },
+  { name: 'Pandas', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/pandas.svg' },
+  { name: 'NumPy', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/numpy.svg' },
+  { name: 'TensorFlow', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/tensorflow.svg' },
+  { name: 'Scikit-learn', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/scikitlearn.svg' },
+  { name: 'Docker', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/docker.svg' },
+  { name: 'Git', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/git.svg' },
 ];
 
 export default function SkillsSection() {
