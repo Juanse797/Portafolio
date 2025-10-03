@@ -30,7 +30,7 @@ export default function ContactSection() {
             Contact Me
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            I'm actively seeking new opportunities to leverage my machine learning skills. If you have a challenging problem to solve, I'd love to connect and discuss how I can help.
+            I'm driven by a passion for building innovative solutions and a constant desire to learn and grow. I thrive in collaborative environments where I can tackle complex challenges. If you're looking for a dedicated and curious engineer for your team, I would be thrilled to connect.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={200}>
