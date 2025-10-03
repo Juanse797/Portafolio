@@ -14,7 +14,7 @@ export default function Footer() {
           <Button asChild variant="outline" className="btn-squishy border-primary/50 text-primary hover:bg-primary/10 hover:text-primary">
             <a href={studioUrl} target="_blank" rel="noopener noreferrer nofollow">
               <PenSquare className="mr-2 h-4 w-4" />
-              Editar Contenido (Solo visible en desarrollo)
+              Edit Content (Visible in Dev)
             </a>
           </Button>
         )}
