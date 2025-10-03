@@ -20,6 +20,8 @@ export default function Home() {
       
       <HeroSection />
 
+      <AboutSection />
+
       <Suspense
         fallback={
           <section id="projects" className="py-20 sm:py-32">
@@ -39,7 +41,6 @@ export default function Home() {
         <ProjectsSection />
       </Suspense>
 
-      <AboutSection />
       <SkillsSection />
       <ContactSection />
     </div>
