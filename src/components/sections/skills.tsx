@@ -1,26 +1,15 @@
 import { Card, CardContent } from '../ui/card';
 import { ScrollReveal } from '../scroll-reveal';
-import * as LucideIcons from 'lucide-react';
+import { Aws, Docker, Nextjs, Python, Scikitlearn, Tensorflow } from '@/components/icons';
 
-// A mapping of skill names to lucide-react icon names
-// Find more icons at https://lucide.dev/
-const skillsList: { name: string; icon: keyof typeof LucideIcons }[] = [
-  { name: 'Python', icon: 'FileCode' },
-  { name: 'TensorFlow', icon: 'BrainCircuit' },
-  { name: 'PyTorch', icon: 'BrainCog' },
-  { name: 'Scikit-learn', icon: 'Binary' },
-  { name: 'AWS', icon: 'Cloud' },
-  { name: 'Docker', icon: 'Container' },
-  { name: 'Next.js', icon: 'Server' },
-  { name: 'React', icon: 'Atom' },
-  { name: 'Kubernetes', icon: 'Ship' },
-  { name: 'Git', icon: 'GitMerge' },
-  { name: 'SQL', icon: 'Database' },
-  { name: 'GenAI', icon: 'Sparkles' },
+const skillsList = [
+  { name: 'Python', icon: Python },
+  { name: 'TensorFlow', icon: Tensorflow },
+  { name: 'Scikit-learn', icon: Scikitlearn },
+  { name: 'AWS', icon: Aws },
+  { name: 'Docker', icon: Docker },
+  { name: 'Next.js', icon: Nextjs },
 ];
-
-// A fallback icon if a specific icon is not found
-const FallbackIcon = LucideIcons['Code'];
 
 export default function SkillsSection() {
   return (
@@ -33,7 +22,7 @@ export default function SkillsSection() {
         </ScrollReveal>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 max-w-4xl mx-auto">
           {skillsList.map((skill, index) => {
-            const IconComponent = LucideIcons[skill.icon] || FallbackIcon;
+            const IconComponent = skill.icon;
             return (
               <ScrollReveal key={skill.name} delay={index * 100}>
                 <Card className="bg-muted/30 border-white/10 text-center group transition-all duration-300 hover:bg-primary/20 hover:-translate-y-2">
