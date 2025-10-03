@@ -25,7 +25,7 @@ const GenerateProjectReadMeSummaryOutputSchema = z.object({
   summary: z
     .string()
     .describe(
-      'A concise and insightful summary of the project, highlighting its purpose, key features, and technologies used.'
+      'A concise and insightful summary of the project, highlighting its purpose, key features, and technologies used, formatted using Markdown.'
     ),
 });
 export type GenerateProjectReadMeSummaryOutput = z.infer<
@@ -42,11 +42,19 @@ const prompt = ai.definePrompt({
   name: 'generateProjectReadMeSummaryPrompt',
   input: {schema: GenerateProjectReadMeSummaryInputSchema},
   output: {schema: GenerateProjectReadMeSummaryOutputSchema},
-  prompt: `You are an AI assistant that summarizes project README files.
+  prompt: `You are an expert technical writer AI that specializes in summarizing project README files for portfolios. Your goal is to produce a clear, structured, and easy-to-read summary.
 
-  Given the content of a README file, provide a concise yet insightful summary of the project. The summary should capture the project's primary purpose, its key features, and the technologies it utilizes.
+  Analyze the following README content and generate a summary formatted in Markdown. The summary must have the following structure:
 
-  README Content: {{{readmeContent}}}`,
+  **1. Main Purpose:** A concise, one-sentence explanation of what the project does.
+  **2. Key Features:** A bulleted list (using '*' or '-') highlighting the 3 to 5 most important features or capabilities.
+  **3. Technologies Used:** A comma-separated list of the key technologies, libraries, and frameworks mentioned.
+
+  Here is the README content:
+  \`\`\`
+  {{{readmeContent}}}
+  \`\`\`
+  `,
   model: 'googleai/gemini-2.5-flash',
 });
 

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
@@ -45,6 +44,12 @@ export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModa
     </ReactMarkdown>
   ), [project.description]);
   
+  const memoizedSummary = useMemo(() => (
+    <ReactMarkdown remarkPlugins={[remarkGfm]} className="markdown-content">
+      {summary || ''}
+    </ReactMarkdown>
+  ), [summary]);
+
   if (!isOpen) return null;
 
   return (
@@ -100,7 +105,7 @@ export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModa
                     <Loader2 className="h-8 w-8 animate-spin text-primary" />
                   </div>
                 ) : (
-                  <p className="text-sm text-foreground/90 whitespace-pre-wrap">{summary}</p>
+                  memoizedSummary
                 )}
               </TabsContent>
               <TabsContent value="readme" className="mt-0">
