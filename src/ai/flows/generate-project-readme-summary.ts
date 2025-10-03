@@ -47,6 +47,7 @@ const prompt = ai.definePrompt({
   Given the content of a README file, provide a concise yet insightful summary of the project. The summary should capture the project's primary purpose, its key features, and the technologies it utilizes.
 
   README Content: {{{readmeContent}}}`,
+  model: 'googleai/gemini-2.5-flash',
 });
 
 const generateProjectReadMeSummaryFlow = ai.defineFlow(
