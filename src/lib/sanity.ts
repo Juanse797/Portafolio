@@ -2,87 +2,71 @@
 import { createClient, type SanityClient } from 'next-sanity';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { unstable_noStore as noStore } from 'next/cache';
 
-// These are read from .env.local or the environment
+// Lee SIEMPRE del entorno "server" (no NEXT_PUBLIC_ para cosas críticas)
 const projectId = process.env.SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
-const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-05-01';
-const token = process.env.SANITY_SECRET_TOKEN;
+const dataset   = process.env.SANITY_DATASET || 'production';
+const apiVersion = process.env.SANITY_API_VERSION || '2024-05-01';
+const token = process.env.SANITY_SECRET_TOKEN; // opcional para preview/datasets privados
 
-// A singleton instance of the Sanity client
 let client: SanityClient | null = null;
 
-// A function to get the initialized Sanity client
-function getSanityClient(): SanityClient | null {
-  if (client) {
-    return client;
-  }
-
-  // Only initialize if all required variables are present and valid
+function getSanityClient({ preview = false }: { preview?: boolean } = {}): SanityClient | null {
+  // Nota: No reutilizamos el cliente singleton aquí porque la 'perspective' puede cambiar.
+  // Se crea una nueva instancia cada vez para asegurar que la configuración es correcta.
   if (projectId && dataset && apiVersion) {
-    client = createClient({
+    const newClient = createClient({
       projectId,
       dataset,
       apiVersion,
       useCdn: false,
-      token,
-      // The perspective property is required for the token to be used
-      perspective: 'raw',
+      // Por defecto, ver SOLO contenido publicado (lo que esperas en prod)
+      perspective: preview && token ? 'previewDrafts' : 'published',
+      token: preview && token ? token : undefined, // usa token solo cuando lo necesitas
     });
-    return client;
+    return newClient;
   }
 
-  // If credentials are not set, return null
   return null;
 }
 
-
-// A singleton instance of the image URL builder
 let builder: ReturnType<typeof imageUrlBuilder> | null = null;
-
 function getImageUrlBuilder() {
-    if (builder) {
-        return builder;
-    }
-    const currentClient = getSanityClient();
-    if (currentClient) {
-        builder = imageUrlBuilder(currentClient);
-        return builder;
-    }
-    return null;
+  if (builder) return builder;
+  const c = getSanityClient();
+  if (c) {
+    builder = imageUrlBuilder({ projectId: c.config().projectId!, dataset: c.config().dataset! });
+    return builder;
+  }
+  return null;
 }
 
 export function urlFor(source: SanityImageSource) {
-  const currentBuilder = getImageUrlBuilder();
-  if (currentBuilder) {
-    return currentBuilder.image(source);
-  }
-  // Return a placeholder or empty string if builder is not available
+  const b = getImageUrlBuilder();
+  if (b) return b.image(source);
   return { url: () => 'https://placehold.co/600x400' };
 }
 
-// Helper function for server-side fetching
+// Helper server-side con noStore() para evitar cualquier cacheo de Next
 export async function sanityFetch<T>({
   query,
   params = {},
-  tags,
+  preview = false,
 }: {
   query: string;
   params?: Record<string, any>;
-  tags?: string[];
+  tags?: string[]; // tags se mantiene por compatibilidad de tipo pero no se usa activamente aquí
+  preview?: boolean;
 }): Promise<T> {
-  const currentClient = getSanityClient();
-  
-  if (!currentClient) {
+  noStore(); // <- desactiva la caché de RSC/Next en esta ejecución
+
+  const c = getSanityClient({ preview });
+  if (!c) {
     console.warn('Sanity client is not configured. Skipping fetch.');
-    // Return an empty array or object to prevent crashes.
     return [] as T;
   }
-  
-  return currentClient.fetch<T>(query, params, {
-    cache: 'no-store', // Always fetch latest data
-    next: {
-      tags,
-    },
-  });
+
+  // OJO: las opciones {cache, next} no las usa Sanity client.fetch
+  return c.fetch<T>(query, params);
 }
