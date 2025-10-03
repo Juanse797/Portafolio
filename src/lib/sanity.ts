@@ -10,12 +10,21 @@ const dataset   = process.env.SANITY_DATASET || 'production';
 const apiVersion = process.env.SANITY_API_VERSION || '2024-05-01';
 const token = process.env.SANITY_SECRET_TOKEN;
 
+// Log para verificar presencia de variables de entorno en el servidor
+console.log('Sanity Env Vars Check:', {
+  projectId: !!process.env.SANITY_PROJECT_ID,
+  dataset: !!process.env.SANITY_DATASET,
+  apiVersion: !!process.env.SANITY_API_VERSION,
+  token: !!process.env.SANITY_SECRET_TOKEN,
+});
+
 const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false, // ¡IMPORTANTE! Siempre en false para usar token y no tener caché
-  token: token, // Usar siempre el token para autenticarse
+  useCdn: false,
+  token: token,
+  perspective: 'raw',
 });
 
 function getImageUrlBuilder() {
