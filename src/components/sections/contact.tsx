@@ -27,10 +27,10 @@ export default function ContactSection() {
       <div className="container mx-auto px-4 max-w-3xl text-center">
         <ScrollReveal>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-            Get In Touch
+            Contact Me
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision.
+            I'm actively seeking new opportunities to leverage my machine learning skills. If you have a challenging problem to solve, I'd love to connect and discuss how I can help.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={200}>
