@@ -8,74 +8,40 @@ import { unstable_noStore as noStore } from 'next/cache';
 const projectId = process.env.SANITY_PROJECT_ID;
 const dataset   = process.env.SANITY_DATASET || 'production';
 const apiVersion = process.env.SANITY_API_VERSION || '2024-05-01';
-const token = process.env.SANITY_SECRET_TOKEN; // opcional para preview/datasets privados
+const token = process.env.SANITY_SECRET_TOKEN;
 
-// --- INICIO DE LOGS PARA DEBUG ---
-console.log('--- Verificación de Variables de Entorno de Sanity ---');
-console.log('¿Existe SANITY_PROJECT_ID?', !!process.env.SANITY_PROJECT_ID);
-console.log('¿Existe SANITY_DATASET?', !!process.env.SANITY_DATASET);
-console.log('¿Existe SANITY_API_VERSION?', !!process.env.SANITY_API_VERSION);
-console.log('¿Existe SANITY_SECRET_TOKEN?', !!process.env.SANITY_SECRET_TOKEN);
-console.log('----------------------------------------------------');
-// --- FIN DE LOGS PARA DEBUG ---
+const client = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false, // ¡IMPORTANTE! Siempre en false para usar token y no tener caché
+  token: token, // Usar siempre el token para autenticarse
+});
 
-let client: SanityClient | null = null;
-
-function getSanityClient({ preview = false }: { preview?: boolean } = {}): SanityClient | null {
-  // Nota: No reutilizamos el cliente singleton aquí porque la 'perspective' puede cambiar.
-  // Se crea una nueva instancia cada vez para asegurar que la configuración es correcta.
-  if (projectId && dataset && apiVersion) {
-    const newClient = createClient({
-      projectId,
-      dataset,
-      apiVersion,
-      useCdn: false,
-      // Por defecto, ver SOLO contenido publicado (lo que esperas en prod)
-      perspective: preview && token ? 'previewDrafts' : 'published',
-      token: preview && token ? token : undefined, // usa token solo cuando lo necesitas
-    });
-    return newClient;
-  }
-
-  return null;
-}
-
-let builder: ReturnType<typeof imageUrlBuilder> | null = null;
 function getImageUrlBuilder() {
-  if (builder) return builder;
-  const c = getSanityClient();
-  if (c) {
-    builder = imageUrlBuilder({ projectId: c.config().projectId!, dataset: c.config().dataset! });
-    return builder;
-  }
-  return null;
+  return imageUrlBuilder(client);
 }
 
 export function urlFor(source: SanityImageSource) {
-  const b = getImageUrlBuilder();
-  if (b) return b.image(source);
-  return { url: () => 'https://placehold.co/600x400' };
+  return getImageUrlBuilder().image(source);
 }
 
 // Helper server-side con noStore() para evitar cualquier cacheo de Next
 export async function sanityFetch<T>({
   query,
   params = {},
-  preview = false,
 }: {
   query: string;
   params?: Record<string, any>;
-  tags?: string[]; // tags se mantiene por compatibilidad de tipo pero no se usa activamente aquí
-  preview?: boolean;
+  tags?: string[];
 }): Promise<T> {
-  noStore(); // <- desactiva la caché de RSC/Next en esta ejecución
+  noStore(); // Desactiva la caché de Next.js para esta petición
 
-  const c = getSanityClient({ preview });
-  if (!c) {
-    console.warn('Sanity client is not configured. Skipping fetch.');
+  if (!projectId || !dataset || !token) {
+    console.warn('Sanity client is not fully configured. Check environment variables.');
+    // @ts-ignore
     return [] as T;
   }
-
-  // OJO: las opciones {cache, next} no las usa Sanity client.fetch
-  return c.fetch<T>(query, params);
+  
+  return client.fetch<T>(query, params);
 }
