@@ -37,7 +37,7 @@ export default function HeroSection() {
           </h1>
         </ScrollReveal>
         <ScrollReveal delay={300}>
-          <h2 className="mt-2 text-2xl md:text-3xl font-semibold text-white text-outline">
+          <h2 className="mt-2 text-2xl md:text-3xl font-semibold animated-text-shine">
             {siteConfig.title}
           </h2>
         </ScrollReveal>
