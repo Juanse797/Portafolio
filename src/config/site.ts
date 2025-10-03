@@ -10,6 +10,7 @@ export const siteConfig = {
     "The personal portfolio of a Machine Learning Engineer, showcasing projects and skills in a modern, interactive single-page website.",
   url: "https://your-domain.com", // TODO: Change this to your domain
   ogImage: "https://your-domain.com/og-image.png", // TODO: Change this
+  avatar: "https://picsum.photos/seed/profile/400/400", // TODO: Change this to your avatar image URL
   links: {
     linkedin: "https://linkedin.com/in/your-profile", // TODO: Update link
     github: "https://github.com/Juanse797/ml-zoomcamp", // TODO: Update link
