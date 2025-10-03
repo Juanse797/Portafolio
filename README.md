@@ -29,8 +29,8 @@ This is a Next.js personal portfolio template for a Machine Learning Engineer, b
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/portfolio-aurora.git
-    cd portfolio-aurora
+    git clone https://github.com/your-username/your-repository-name.git
+    cd your-repository-name
     ```
 
 2.  **Install dependencies:**
@@ -48,8 +48,8 @@ This project fetches project data from Sanity.io.
 
 1.  **Set up your Sanity Studio:**
     - If you don't have one, create a new Sanity project: `npx sanity@latest init`.
-    - Copy the schema file from `/sanity/schemas/project.ts` in this repository to the `schemas` folder in your Sanity Studio project.
-    - Add the new schema to your `sanity.config.ts` (or `.js`).
+    - Copy the schema files from `/sanity/schemas/` in this repository to the `schemas` folder in your Sanity Studio project.
+    - Add the new schemas to your `sanity.config.ts` (or `.js`).
     - Deploy your studio: `npx sanity@latest deploy`.
 
 2.  **Add content:**
@@ -57,11 +57,7 @@ This project fetches project data from Sanity.io.
 
 ### 4. Environment Variables
 
-Create a `.env.local` file in the root of the project by copying the `.env.example` file:
-
-```bash
-cp .env.example .env.local
-```
+Create a `.env.local` file in the root of the project by copying the `.env.example` file (if it exists) or creating a new one.
 
 Now, fill in the values in `.env.local`:
 
@@ -76,13 +72,9 @@ Start the Next.js development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:9002](http://localhost:9002) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) (or the port specified) with your browser to see the result.
 
 ### 6. Building for Production
 
