@@ -3,51 +3,60 @@ import { createClient, type SanityClient } from 'next-sanity';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
-// Store the client and builder in a memoized structure
-const sanity: {
-  client: SanityClient | null;
-  builder: ReturnType<typeof imageUrlBuilder> | null;
-} = {
-  client: null,
-  builder: null,
-};
+// These are read from .env.local or the environment
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
+const token = process.env.SANITY_SECRET_TOKEN;
 
-function getSanityClient() {
-  // If the client is already initialized, return it
-  if (sanity.client && sanity.builder) {
-    return sanity;
+// A singleton instance of the Sanity client
+let client: SanityClient | null = null;
+
+// A function to get the initialized Sanity client
+function getSanityClient(): SanityClient | null {
+  if (client) {
+    return client;
   }
-
-  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
-  const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
-  const token = process.env.SANITY_SECRET_TOKEN;
 
   // Only initialize if all required variables are present and valid
   if (projectId && dataset && apiVersion) {
-    const client = createClient({
+    client = createClient({
       projectId,
       dataset,
       apiVersion,
       useCdn: process.env.NODE_ENV === 'production',
       token,
     });
-    sanity.client = client;
-    sanity.builder = imageUrlBuilder(client);
+    return client;
   }
-  
-  return sanity;
+
+  // If credentials are not set, return null
+  return null;
+}
+
+
+// A singleton instance of the image URL builder
+let builder: ReturnType<typeof imageUrlBuilder> | null = null;
+
+function getImageUrlBuilder() {
+    if (builder) {
+        return builder;
+    }
+    const currentClient = getSanityClient();
+    if (currentClient) {
+        builder = imageUrlBuilder(currentClient);
+        return builder;
+    }
+    return null;
 }
 
 export function urlFor(source: SanityImageSource) {
-  const { builder } = getSanityClient();
-  if (!builder) {
-    // Return a placeholder if Sanity is not configured
-    return {
-      url: () => 'https://placehold.co/600x400',
-    };
+  const currentBuilder = getImageUrlBuilder();
+  if (currentBuilder) {
+    return currentBuilder.image(source);
   }
-  return builder.image(source);
+  // Return a placeholder or empty string if builder is not available
+  return { url: () => 'https://placehold.co/600x400' };
 }
 
 // Helper function for server-side fetching
@@ -60,14 +69,15 @@ export async function sanityFetch<T>({
   params?: Record<string, any>;
   tags?: string[];
 }): Promise<T> {
-  const { client } = getSanityClient();
-  if (!client) {
-    // Gracefully handle missing project ID by returning an empty array.
-    console.warn('Sanity project ID/dataset is not configured. Skipping fetch. Returning empty array.');
+  const currentClient = getSanityClient();
+  
+  if (!currentClient) {
+    console.warn('Sanity client is not configured. Skipping fetch.');
+    // Return an empty array or object to prevent crashes
     return [] as T;
   }
-
-  return client.fetch<T>(query, params, {
+  
+  return currentClient.fetch<T>(query, params, {
     cache: 'force-cache',
     next: {
       revalidate: process.env.NODE_ENV === 'development' ? 30 : 3600,
