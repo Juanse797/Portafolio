@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from '../ui/card';
 import { ScrollReveal } from '../scroll-reveal';
 import {
@@ -32,7 +33,7 @@ export default function SkillsSection() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-4xl mx-auto">
           {skillsList.map((skill, index) => (
             <ScrollReveal key={skill.name} delay={index * 100}>
-              <Card className="bg-muted/30 border-white/10 text-center group transition-all duration-300 hover:bg-primary/20 hover:-translate-y-2">
+              <Card className="bg-muted/30 border-white/10 text-center group transition-all duration-300 hover:scale-105 hover:shadow-glow-md">
                 <CardContent className="p-6 flex flex-col items-center justify-center gap-4 h-full">
                   <div className="relative w-12 h-12 flex-shrink-0">
                     <skill.icon className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110" />
