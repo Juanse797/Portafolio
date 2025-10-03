@@ -3,32 +3,36 @@ import { createClient, type SanityClient } from 'next-sanity';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
-const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
-const token = process.env.SANITY_SECRET_TOKEN;
+// Store the client and builder in a memoized structure
+const sanity = {
+  client: null as SanityClient | null,
+  builder: null as ReturnType<typeof imageUrlBuilder> | null,
+};
 
-let client: SanityClient | null = null;
-let builder: ReturnType<typeof imageUrlBuilder> | null = null;
-
-// Lazily initialize the client and builder
 function getSanityClient() {
-  if (client) {
-    return { client, builder };
+  // If the client is already initialized, return it
+  if (sanity.client && sanity.builder) {
+    return sanity;
   }
-  
+
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+  const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
+  const token = process.env.SANITY_SECRET_TOKEN;
+
+  // Only initialize if all required variables are present
   if (projectId && dataset && apiVersion) {
-    client = createClient({
+    sanity.client = createClient({
       projectId,
       dataset,
       apiVersion,
       useCdn: process.env.NODE_ENV === 'production',
-      token: token,
+      token,
     });
-    builder = imageUrlBuilder(client);
+    sanity.builder = imageUrlBuilder(sanity.client);
   }
   
-  return { client, builder };
+  return sanity;
 }
 
 export function urlFor(source: SanityImageSource) {
