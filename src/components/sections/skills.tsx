@@ -6,17 +6,18 @@ import {
   NumpyIcon,
   SklearnIcon,
   GitIcon,
+  MatplotlibIcon,
+  DockerIcon,
 } from '../icons';
-import { BarChart, Container } from 'lucide-react';
 
 const skillsList = [
   { name: 'Python', icon: PythonIcon },
   { name: 'Pandas', icon: PandasIcon },
   { name: 'NumPy', icon: NumpyIcon },
-  { name: 'Matplotlib/Seaborn', icon: BarChart },
+  { name: 'Matplotlib/Seaborn', icon: MatplotlibIcon },
   { name: 'Scikit-learn', icon: SklearnIcon },
   { name: 'Git', icon: GitIcon },
-  { name: 'Docker', icon: Container },
+  { name: 'Docker', icon: DockerIcon },
 ];
 
 export default function SkillsSection() {
