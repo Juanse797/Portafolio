@@ -24,8 +24,10 @@ function getSanityClient(): SanityClient | null {
       projectId,
       dataset,
       apiVersion,
-      useCdn: process.env.NODE_ENV === 'production',
-      //token,
+      useCdn: false,
+      token,
+      // The perspective property is required for the token to be used
+      perspective: 'raw',
     });
     return client;
   }
@@ -78,9 +80,8 @@ export async function sanityFetch<T>({
   }
   
   return currentClient.fetch<T>(query, params, {
-    // Replaced cache strategy to allow more dynamic fetching
+    cache: 'no-store', // Always fetch latest data
     next: {
-      revalidate: process.env.NODE_ENV === 'development' ? 5 : 60, // Shorter revalidation time
       tags,
     },
   });
