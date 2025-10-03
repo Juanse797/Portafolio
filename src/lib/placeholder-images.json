@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "project-1",
+      "description": "Abstract visualization of a machine learning model",
+      "imageUrl": "https://images.unsplash.com/photo-1644088379091-d574269d422f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGRhdGF8ZW58MHx8fHwxNzU5MzkxMjc1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract data"
+    },
+    {
+      "id": "project-2",
+      "description": "A neural network structure visualization",
+      "imageUrl": "https://images.unsplash.com/photo-1645839057098-5ea8761a6b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bmV1cmFsJTIwbmV0d29ya3xlbnwwfHx8fDE3NTkzNDE0Mzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "neural network"
+    },
+    {
+      "id": "project-3",
+      "description": "Data points being clustered by an algorithm",
+      "imageUrl": "https://images.unsplash.com/photo-1756756736901-a2bf24f2d2de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxkYXRhJTIwY2x1c3RlcnxlbnwwfHx8fDE3NTk0NTAxNDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "data cluster"
+    },
+    {
+      "id": "project-4",
+      "description": "Futuristic heads-up display with code and graphs",
+      "imageUrl": "https://images.unsplash.com/photo-1638328083481-a19976e07823?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmdXR1cmlzdGljJTIwaHVkfGVufDB8fHx8MTc1OTQxODU3NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "futuristic hud"
+    },
+    {
+      "id": "project-5",
+      "description": "An artistic representation of an artificial intelligence brain",
+      "imageUrl": "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxhaSUyMGJyYWlufGVufDB8fHx8MTc1OTQ1MDE0N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ai brain"
+    },
+    {
+      "id": "project-6",
+      "description": "Server racks in a data center",
+      "imageUrl": "https://images.unsplash.com/photo-1506399309177-3b43e99fead2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkYXRhJTIwY2VudGVyfGVufDB8fHx8MTc1OTQyOTgxN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "data center"
+    }
+  ]
 }

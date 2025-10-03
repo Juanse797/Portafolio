@@ -8,6 +8,13 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       fontFamily: {
         body: ['Inter', 'sans-serif'],
@@ -71,6 +78,10 @@ export default {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      boxShadow: {
+        'glow-md': '0 0 15px hsl(var(--primary) / 0.5)',
+        'glow-lg': '0 0 25px hsl(var(--primary) / 0.8)',
+      },
       keyframes: {
         'accordion-down': {
           from: {
@@ -88,10 +99,21 @@ export default {
             height: '0',
           },
         },
+        aurora: {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
+        },
+        shimmer: {
+          'from': { 'background-position': '200% 0' },
+          'to': { 'background-position': '-200% 0' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'aurora': 'aurora 45s ease infinite',
+        'shimmer': 'shimmer 1.5s linear infinite',
       },
     },
   },
