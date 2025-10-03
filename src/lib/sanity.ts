@@ -10,6 +10,15 @@ const dataset   = process.env.SANITY_DATASET || 'production';
 const apiVersion = process.env.SANITY_API_VERSION || '2024-05-01';
 const token = process.env.SANITY_SECRET_TOKEN; // opcional para preview/datasets privados
 
+// --- INICIO DE LOGS PARA DEBUG ---
+console.log('--- Verificación de Variables de Entorno de Sanity ---');
+console.log('¿Existe SANITY_PROJECT_ID?', !!process.env.SANITY_PROJECT_ID);
+console.log('¿Existe SANITY_DATASET?', !!process.env.SANITY_DATASET);
+console.log('¿Existe SANITY_API_VERSION?', !!process.env.SANITY_API_VERSION);
+console.log('¿Existe SANITY_SECRET_TOKEN?', !!process.env.SANITY_SECRET_TOKEN);
+console.log('----------------------------------------------------');
+// --- FIN DE LOGS PARA DEBUG ---
+
 let client: SanityClient | null = null;
 
 function getSanityClient({ preview = false }: { preview?: boolean } = {}): SanityClient | null {
