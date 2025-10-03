@@ -12,8 +12,14 @@ const navLinks = [
 
 export default function Header() {
   const [activeSection, setActiveSection] = useState('home');
-  const [indicatorStyle, setIndicatorStyle] = useState({});
+  const [indicatorStyle, setIndicatorStyle] = useState({
+    left: 0,
+    width: 0,
+    opacity: 0,
+  });
+
   const navRef = useRef<HTMLUListElement>(null);
+  const linkRefs = useRef<Map<string, HTMLAnchorElement | null>>(new Map());
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
@@ -45,14 +51,18 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    if (navRef.current) {
-      const activeLink = navRef.current.querySelector(`[data-nav-id="${activeSection}"]`) as HTMLElement;
-      if (activeLink) {
-        setIndicatorStyle({
-          left: `${activeLink.offsetLeft}px`,
-          width: `${activeLink.offsetWidth}px`,
-        });
-      }
+    const activeLink = linkRefs.current.get(activeSection);
+    const navElement = navRef.current;
+
+    if (activeLink && navElement) {
+      const navRect = navElement.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+
+      setIndicatorStyle({
+        left: linkRect.left - navRect.left,
+        width: linkRect.width,
+        opacity: 1,
+      });
     }
   }, [activeSection]);
 
@@ -65,7 +75,7 @@ export default function Header() {
               <li key={link.id}>
                 <a
                   href={`#${link.id}`}
-                  data-nav-id={link.id}
+                  ref={(el) => linkRefs.current.set(link.id, el)}
                   onClick={(e) => handleScroll(e, link.id)}
                   className={cn(
                     'relative px-3 py-2 text-sm font-medium transition-colors hover:text-foreground',
@@ -78,7 +88,7 @@ export default function Header() {
               </li>
             ))}
             <span
-              className="absolute -bottom-1.5 h-0.5 bg-primary rounded-full transition-all duration-300 ease-in-out"
+              className="absolute bottom-0 h-0.5 bg-primary rounded-full transition-all duration-300 ease-in-out"
               style={indicatorStyle}
             />
           </ul>
