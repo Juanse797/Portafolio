@@ -1,9 +1,10 @@
+
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Sebastian Ariza",
+  name: "Sebastián Ariza",
   title: "Machine Learning Engineer",
-  author: "Sebastian Ariza",
+  author: "Sebastián Ariza",
   appName: "Portfolio Aurora",
   description:
     "The personal portfolio of a Machine Learning Engineer, showcasing projects and skills in a modern, interactive single-page website.",
