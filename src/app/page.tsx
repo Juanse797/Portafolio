@@ -1,3 +1,4 @@
+
 import { Suspense } from 'react';
 import HeroSection from '@/components/sections/hero';
 import ProjectsSection from '@/components/sections/projects';
@@ -6,6 +7,7 @@ import SkillsSection from '@/components/sections/skills';
 import ContactSection from '@/components/sections/contact';
 import ProjectCardSkeleton from '@/components/project-card-skeleton';
 
+// Force reload to fetch new Sanity data
 export default function Home() {
   const skeletonCount = 3;
 
