@@ -1,9 +1,9 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Your Name",
+  name: "Sebastian Ariza",
   title: "Machine Learning Engineer",
-  author: "Your Name",
+  author: "Sebastian Ariza",
   appName: "Portfolio Aurora",
   description:
     "The personal portfolio of a Machine Learning Engineer, showcasing projects and skills in a modern, interactive single-page website.",

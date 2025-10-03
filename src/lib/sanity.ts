@@ -25,7 +25,7 @@ function getSanityClient(): SanityClient | null {
       dataset,
       apiVersion,
       useCdn: process.env.NODE_ENV === 'production',
-      token,
+      //token,
     });
     return client;
   }
