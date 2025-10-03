@@ -4,9 +4,9 @@ import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 // These are read from .env.local or the environment
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
-const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'so9wm90k';
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
+const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-05-01';
 const token = process.env.SANITY_SECRET_TOKEN;
 
 // A singleton instance of the Sanity client
