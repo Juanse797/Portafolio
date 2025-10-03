@@ -12,7 +12,7 @@ export const siteConfig = {
   ogImage: "https://your-domain.com/og-image.png", // TODO: Change this
   links: {
     linkedin: "https://linkedin.com/in/your-profile", // TODO: Update link
-    github: "https://github.com/your-username", // TODO: Update link
+    github: "https://github.com/Juanse797/ml-zoomcamp", // TODO: Update link
     email: "mailto:your.email@example.com", // TODO: Update link
   },
 };
