@@ -30,7 +30,7 @@ export default function ContactSection() {
             Contact Me
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            I'm passionate about building tangible solutions by experimenting with new technologies. As a curious and dedicated engineer, I thrive in collaborative teams and I'm always ready for the next challenge. Let's connect!
+            I'm passionate about transforming ideas into real solutions. As a curious and dedicated engineer, I'm always ready to take on new challenges. If you'd like to learn more about my work or discuss potential opportunities, please feel free to reach out.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={200}>
