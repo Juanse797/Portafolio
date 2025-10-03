@@ -1,15 +1,15 @@
-import Image from 'next/image';
 import { Card, CardContent } from '../ui/card';
 import { ScrollReveal } from '../scroll-reveal';
+import { PythonIcon } from '../icons';
 
 const skillsList = [
-  { name: 'Python', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/python.svg' },
-  { name: 'Pandas', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/pandas.svg' },
-  { name: 'NumPy', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/numpy.svg' },
-  { name: 'TensorFlow', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/tensorflow.svg' },
-  { name: 'Scikit-learn', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/scikitlearn.svg' },
-  { name: 'Docker', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/docker.svg' },
-  { name: 'Git', iconUrl: 'https://cdn.jsdelivr.net/gh/techicons/tech-icons/icons/git.svg' },
+  { name: 'Python', icon: PythonIcon },
+  // { name: 'Pandas', icon: PandasIcon },
+  // { name: 'NumPy', icon: NumpyIcon },
+  // { name: 'TensorFlow', icon: TensorflowIcon },
+  // { name: 'Scikit-learn', icon: ScikitLearnIcon },
+  // { name: 'Docker', icon: DockerIcon },
+  // { name: 'Git', icon: GitIcon },
 ];
 
 export default function SkillsSection() {
@@ -27,12 +27,7 @@ export default function SkillsSection() {
               <Card className="bg-muted/30 border-white/10 text-center group transition-all duration-300 hover:bg-primary/20 hover:-translate-y-2">
                 <CardContent className="p-6 flex flex-col items-center justify-center gap-4 h-full">
                   <div className="relative w-12 h-12 flex-shrink-0">
-                    <Image 
-                      src={skill.iconUrl}
-                      alt={`${skill.name} logo`}
-                      fill
-                      className="object-contain transition-transform duration-300 group-hover:scale-110"
-                    />
+                    <skill.icon className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110" />
                   </div>
                   <p className="font-semibold text-sm mt-auto">{skill.name}</p>
                 </CardContent>
