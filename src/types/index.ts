@@ -10,3 +10,10 @@ export interface Project {
   githubLink: string;
   demoLink?: string;
 }
+
+export interface About {
+  _id: string;
+  heading: string;
+  paragraph1: string;
+  paragraph2: string;
+}

@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity';
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'project',
@@ -31,7 +31,7 @@ export default defineType({
       name: 'description',
       title: 'Description (README.md content)',
       type: 'text',
-      description: 'The full content of the project\'s README.md file.',
+      description: "The full content of the project's README.md file.",
       validation: Rule => Rule.required(),
     }),
     defineField({
@@ -74,12 +74,12 @@ export default defineType({
       order: 'order',
     },
     prepare(selection) {
-      const {title, media, order} = selection;
+      const {title, media, order} = selection
       return {
         title: title,
         subtitle: `Order: ${order}`,
         media: media,
-      };
+      }
     },
   },
-});
+})
