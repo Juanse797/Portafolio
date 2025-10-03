@@ -4,9 +4,12 @@ import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 // Store the client and builder in a memoized structure
-const sanity = {
-  client: null as SanityClient | null,
-  builder: null as ReturnType<typeof imageUrlBuilder> | null,
+const sanity: {
+  client: SanityClient | null;
+  builder: ReturnType<typeof imageUrlBuilder> | null;
+} = {
+  client: null,
+  builder: null,
 };
 
 function getSanityClient() {
@@ -20,16 +23,17 @@ function getSanityClient() {
   const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
   const token = process.env.SANITY_SECRET_TOKEN;
 
-  // Only initialize if all required variables are present
+  // Only initialize if all required variables are present and valid
   if (projectId && dataset && apiVersion) {
-    sanity.client = createClient({
+    const client = createClient({
       projectId,
       dataset,
       apiVersion,
       useCdn: process.env.NODE_ENV === 'production',
       token,
     });
-    sanity.builder = imageUrlBuilder(sanity.client);
+    sanity.client = client;
+    sanity.builder = imageUrlBuilder(client);
   }
   
   return sanity;
