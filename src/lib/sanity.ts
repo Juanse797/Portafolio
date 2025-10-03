@@ -1,32 +1,12 @@
-
-import { createClient } from 'next-sanity';
-import imageUrlBuilder from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+// src/lib/sanity.ts
 import { unstable_noStore as noStore } from 'next/cache';
+import { client } from './sanity-client';
+export { urlFor } from './sanity-client';
 
-// Lee SIEMPRE del entorno "server"
-const projectId = process.env.SANITY_PROJECT_ID;
-const dataset = process.env.SANITY_DATASET || 'production';
-const apiVersion = process.env.SANITY_API_VERSION || '2024-05-01';
-const token = process.env.SANITY_SECRET_TOKEN;
-
-const client = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  token,
-  useCdn: false, // ¡IMPORTANTE! Desactiva el CDN para obtener datos frescos siempre
-  perspective: 'raw', // Permite ver borradores y datos publicados
-});
-
-function getImageUrlBuilder() {
-  return imageUrlBuilder(client);
-}
-
-export function urlFor(source: SanityImageSource) {
-  return getImageUrlBuilder().image(source);
-}
-
+/**
+ * Main function for fetching data on the SERVER.
+ * It uses the configured client.
+ */
 export async function sanityFetch<T>({
   query,
   params = {},
@@ -34,13 +14,7 @@ export async function sanityFetch<T>({
   query: string;
   params?: Record<string, any>;
 }): Promise<T> {
-  noStore(); // Desactiva la caché de Next.js para esta petición
+  noStore(); // Disables Next.js caching for this fetch
 
-  if (!projectId || !dataset || !token) {
-    console.warn('Sanity client is not fully configured. Check environment variables in .env');
-    // @ts-ignore
-    return [] as T;
-  }
-  
   return client.fetch<T>(query, params);
 }
