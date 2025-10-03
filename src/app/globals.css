@@ -143,11 +143,6 @@
   .markdown-content table { @apply w-full my-4 border-collapse; }
   .markdown-content th, .markdown-content td { @apply border border-border px-4 py-2; }
   .markdown-content th { @apply bg-muted; }
-
-  /* Active navigation link glow */
-  .nav-active-glow {
-    animation: pulsing-glow 4s infinite ease-in-out;
-  }
 }
 
 @keyframes aurora {
@@ -164,16 +159,4 @@
 @keyframes text-shine {
   from { background-position: 200% center; }
   to { background-position: -200% center; }
-}
-
-@keyframes pulsing-glow {
-  0% {
-    box-shadow: 0 0 8px hsl(var(--primary) / 0.3), 0 0 12px hsl(var(--primary) / 0.2);
-  }
-  50% {
-    box-shadow: 0 0 16px hsl(var(--primary) / 0.5), 0 0 24px hsl(var(--primary) / 0.3);
-  }
-  100% {
-    box-shadow: 0 0 8px hsl(var(--primary) / 0.3), 0 0 12px hsl(var(--primary) / 0.2);
-  }
 }
