@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
@@ -26,18 +27,24 @@ export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModa
   const imageUrl = project.image ? urlFor(project.image).url() : 'https://placehold.co/800x600';
 
   useEffect(() => {
+    const fetchSummary = async () => {
+      setIsSummaryLoading(true);
+      const result = await getReadmeSummary(project.description);
+      setSummary(result);
+      setIsSummaryLoading(false);
+    };
+
     if (isOpen) {
-      document.body.style.pointerEvents = 'auto';
-
-      const fetchSummary = async () => {
-        setIsSummaryLoading(true);
-        const result = await getReadmeSummary(project.description);
-        setSummary(result);
-        setIsSummaryLoading(false);
-      };
-
+      document.body.classList.remove('hide-cursor');
       fetchSummary();
+    } else {
+      document.body.classList.add('hide-cursor');
     }
+
+    // Cleanup function to ensure the cursor is shown when the component unmounts
+    return () => {
+      document.body.classList.add('hide-cursor');
+    };
   }, [isOpen, project.description]);
 
   const memoizedMarkdown = useMemo(() => (
