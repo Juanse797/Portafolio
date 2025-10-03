@@ -17,10 +17,7 @@ export default function Header() {
     e.preventDefault();
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
-      window.scrollTo({
-        top: targetElement.offsetTop,
-        behavior: 'smooth',
-      });
+      targetElement.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -43,7 +40,25 @@ export default function Header() {
       }
     });
 
-    return () => observer.disconnect();
+    // Special handling for the home section to be active when at the top
+    const homeElement = document.getElementById('home');
+    const homeObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setActiveSection('home');
+        }
+      },
+      { threshold: 0.8 }
+    );
+
+    if (homeElement) {
+      homeObserver.observe(homeElement);
+    }
+
+    return () => {
+      observer.disconnect();
+      homeObserver.disconnect();
+    };
   }, []);
 
   return (
