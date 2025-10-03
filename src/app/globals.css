@@ -58,6 +58,10 @@
     cursor: none;
   }
 
+  .text-outline {
+    -webkit-text-stroke: 1px black;
+  }
+
   /* Squishy button styles */
   .btn-squishy {
     @apply transform-gpu transition-transform duration-200 ease-in-out;

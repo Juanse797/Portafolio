@@ -26,7 +26,7 @@ export default function HeroSection() {
               alt={siteConfig.name}
               width={160}
               height={160}
-              className="rounded-full object-cover border-4 border-primary/50 shadow-glow-md"
+              className="rounded-full object-cover border-2 border-primary/50 shadow-glow-md"
               priority
             />
           </div>
@@ -37,7 +37,7 @@ export default function HeroSection() {
           </h1>
         </ScrollReveal>
         <ScrollReveal delay={300}>
-          <h2 className="mt-2 text-2xl md:text-3xl font-semibold text-primary">
+          <h2 className="mt-2 text-2xl md:text-3xl font-semibold text-white text-outline">
             {siteConfig.title}
           </h2>
         </ScrollReveal>
