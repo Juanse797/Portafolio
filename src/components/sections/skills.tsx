@@ -1,15 +1,14 @@
 import { Card, CardContent } from '../ui/card';
 import { ScrollReveal } from '../scroll-reveal';
 import { PythonIcon } from '../icons';
+import { BrainCircuit, Database, GitMerge } from 'lucide-react';
 
 const skillsList = [
   { name: 'Python', icon: PythonIcon },
-  // { name: 'Pandas', icon: PandasIcon },
-  // { name: 'NumPy', icon: NumpyIcon },
-  // { name: 'TensorFlow', icon: TensorflowIcon },
-  // { name: 'Scikit-learn', icon: ScikitLearnIcon },
-  // { name: 'Docker', icon: DockerIcon },
-  // { name: 'Git', icon: GitIcon },
+  { name: 'Pandas', icon: Database },
+  { name: 'NumPy', icon: Database },
+  { name: 'Scikit-learn', icon: BrainCircuit },
+  { name: 'Git', icon: GitMerge },
 ];
 
 export default function SkillsSection() {
@@ -21,7 +20,7 @@ export default function SkillsSection() {
             Technical Skills
           </h2>
         </ScrollReveal>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-4xl mx-auto">
           {skillsList.map((skill, index) => (
             <ScrollReveal key={skill.name} delay={index * 100}>
               <Card className="bg-muted/30 border-white/10 text-center group transition-all duration-300 hover:bg-primary/20 hover:-translate-y-2">
