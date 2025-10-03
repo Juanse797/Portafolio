@@ -143,6 +143,11 @@
   .markdown-content table { @apply w-full my-4 border-collapse; }
   .markdown-content th, .markdown-content td { @apply border border-border px-4 py-2; }
   .markdown-content th { @apply bg-muted; }
+
+  /* Static glow for active nav item */
+  .nav-active-glow {
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.6);
+  }
 }
 
 @keyframes aurora {
