@@ -17,6 +17,8 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const imageUrl = project.image ? urlFor(project.image).width(600).height(400).url() : 'https://placehold.co/600x400';
+
 
   return (
     <>
@@ -41,7 +43,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </CardHeader>
         <CardContent className="relative z-10 p-4 pt-0">
           <Image
-            src={urlFor(project.image).width(600).height(400).url()}
+            src={imageUrl}
             alt={project.title}
             width={600}
             height={400}

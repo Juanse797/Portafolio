@@ -23,6 +23,7 @@ type ProjectModalProps = {
 export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModalProps) {
   const [summary, setSummary] = useState<string | null>(null);
   const [isSummaryLoading, setIsSummaryLoading] = useState(true);
+  const imageUrl = project.image ? urlFor(project.image).url() : 'https://placehold.co/800x600';
 
   useEffect(() => {
     if (isOpen) {
@@ -66,7 +67,7 @@ export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModa
           <div className="flex flex-col space-y-4">
             <div className="relative aspect-video w-full">
               <Image
-                src={urlFor(project.image).url()}
+                src={imageUrl}
                 alt={project.title}
                 fill
                 className="rounded-lg object-cover"
