@@ -1,14 +1,14 @@
+import Image from 'next/image';
 import { Card, CardContent } from '../ui/card';
 import { ScrollReveal } from '../scroll-reveal';
-import { Aws, Docker, Nextjs, Python, Scikitlearn, Tensorflow } from '@/components/icons';
 
 const skillsList = [
-  { name: 'Python', icon: Python },
-  { name: 'TensorFlow', icon: Tensorflow },
-  { name: 'Scikit-learn', icon: Scikitlearn },
-  { name: 'AWS', icon: Aws },
-  { name: 'Docker', icon: Docker },
-  { name: 'Next.js', icon: Nextjs },
+  { name: 'Python', iconUrl: 'https://profilinator.rishav.dev/skills-assets/python-original.svg' },
+  { name: 'TensorFlow', iconUrl: 'https://profilinator.rishav.dev/skills-assets/tensorflow-original.svg' },
+  { name: 'Scikit-learn', iconUrl: 'https://profilinator.rishav.dev/skills-assets/scikitlearn-original.svg' },
+  { name: 'AWS', iconUrl: 'https://profilinator.rishav.dev/skills-assets/aws-original-wordmark.svg' },
+  { name: 'Docker', iconUrl: 'https://profilinator.rishav.dev/skills-assets/docker-original-wordmark.svg' },
+  { name: 'Next.js', iconUrl: 'https://profilinator.rishav.dev/skills-assets/nextjs-original-wordmark.svg' },
 ];
 
 export default function SkillsSection() {
@@ -21,19 +21,23 @@ export default function SkillsSection() {
           </h2>
         </ScrollReveal>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 max-w-4xl mx-auto">
-          {skillsList.map((skill, index) => {
-            const IconComponent = skill.icon;
-            return (
-              <ScrollReveal key={skill.name} delay={index * 100}>
-                <Card className="bg-muted/30 border-white/10 text-center group transition-all duration-300 hover:bg-primary/20 hover:-translate-y-2">
-                  <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
-                    <IconComponent className="w-12 h-12 text-primary transition-transform duration-300 group-hover:scale-110" />
-                    <p className="font-semibold text-sm">{skill.name}</p>
-                  </CardContent>
-                </Card>
-              </ScrollReveal>
-            );
-          })}
+          {skillsList.map((skill, index) => (
+            <ScrollReveal key={skill.name} delay={index * 100}>
+              <Card className="bg-muted/30 border-white/10 text-center group transition-all duration-300 hover:bg-primary/20 hover:-translate-y-2">
+                <CardContent className="p-6 flex flex-col items-center justify-center gap-4">
+                  <div className="relative w-12 h-12">
+                    <Image 
+                      src={skill.iconUrl}
+                      alt={`${skill.name} logo`}
+                      fill
+                      className="object-contain transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                  <p className="font-semibold text-sm">{skill.name}</p>
+                </CardContent>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
       </div>
     </section>
