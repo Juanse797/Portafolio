@@ -13,7 +13,7 @@ export const siteConfig = {
   avatar: "https://picsum.photos/seed/profile/400/400", // TODO: Change this to your avatar image URL
   links: {
     linkedin: "https://www.linkedin.com/in/sebastian-ariza-351548303/",
-    github: "https://github.com/Juanse797/ml-zoomcamp", // TODO: Update link
+    github: "https://github.com/Juanse797", // TODO: Update link
     email: "mailto:your.email@example.com", // TODO: Update link
   },
 };
