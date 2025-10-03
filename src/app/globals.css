@@ -73,7 +73,7 @@
       hsl(var(--muted-foreground))
     );
     background-size: 200% 100%;
-    animation: text-shine 5s linear infinite;
+    animation: text-shine 8s linear infinite;
   }
 
   /* Squishy button styles */
