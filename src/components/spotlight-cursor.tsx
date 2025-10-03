@@ -20,20 +20,6 @@ export default function SpotlightCursor() {
     };
   }, []);
 
-  // When the project modal is open, we need to show the cursor.
-  useEffect(() => {
-    const handleModalChange = () => {
-      if (document.querySelector('[data-radix-dialog-content]')) {
-        document.body.classList.remove('hide-cursor');
-      } else {
-        document.body.classList.add('hide-cursor');
-      }
-    };
-    const observer = new MutationObserver(handleModalChange);
-    observer.observe(document.body, { childList: true, subtree: true });
-    return () => observer.disconnect();
-  }, [])
-
   if (!isClient) return null;
 
   return (
