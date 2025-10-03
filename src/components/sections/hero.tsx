@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Download } from 'lucide-react';
 import { ScrollReveal } from '../scroll-reveal';
