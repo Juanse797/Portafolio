@@ -12,7 +12,7 @@ export const siteConfig = {
   ogImage: "https://your-domain.com/og-image.png", // TODO: Change this
   avatar: "https://picsum.photos/seed/profile/400/400", // TODO: Change this to your avatar image URL
   links: {
-    linkedin: "https://linkedin.com/in/your-profile", // TODO: Update link
+    linkedin: "https://www.linkedin.com/in/sebastian-ariza-351548303/",
     github: "https://github.com/Juanse797/ml-zoomcamp", // TODO: Update link
     email: "mailto:your.email@example.com", // TODO: Update link
   },
