@@ -4,7 +4,7 @@ import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 // These are read from .env.local or the environment
-const projectId = process.env.SANITY_PROJECT_ID || 'so9wm90k';
+const projectId = process.env.SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-05-01';
 const token = process.env.SANITY_SECRET_TOKEN;
@@ -73,7 +73,7 @@ export async function sanityFetch<T>({
   
   if (!currentClient) {
     console.warn('Sanity client is not configured. Skipping fetch.');
-    // Return an empty array or object to prevent crashes
+    // Return an empty array or object to prevent crashes.
     return [] as T;
   }
   
