@@ -6,9 +6,6 @@ import Footer from "@/components/footer";
 import SpotlightCursor from "@/components/spotlight-cursor";
 import { siteConfig } from '@/config/site';
 
-const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
-const basePath = isGithubActions ? '/Portafolio' : '';
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -49,7 +46,6 @@ export const metadata: Metadata = {
     },
   },
   authors: [{ name: siteConfig.author }],
-  // Let Next.js handle the base path for icons in metadata
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
@@ -65,6 +61,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
+  // Use absolute paths for favicons to avoid basepath issues
+  const basePath = isGithubActions ? 'https://juanse797.github.io/Portafolio' : '';
+
   return (
     <html lang="en" className="dark font-body antialiased">
       <head>
