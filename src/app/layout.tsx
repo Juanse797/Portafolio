@@ -49,6 +49,7 @@ export const metadata: Metadata = {
     },
   },
   authors: [{ name: siteConfig.author }],
+  // Let Next.js handle the base path for icons in metadata
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
@@ -70,6 +71,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+        <link rel="icon" href={`${basePath}/favicon.ico`} sizes="any" />
+        <link rel="apple-touch-icon" href={`${basePath}/apple-touch-icon.png`} />
       </head>
       <body className="bg-background text-foreground">
         <SpotlightCursor />
