@@ -1,5 +1,4 @@
 // src/lib/sanity.ts
-import { unstable_noStore as noStore } from 'next/cache';
 import { client } from './sanity-client';
 export { urlFor } from './sanity-client';
 
@@ -14,7 +13,13 @@ export async function sanityFetch<T>({
   query: string;
   params?: Record<string, any>;
 }): Promise<T> {
-  noStore(); // Disables Next.js caching for this fetch
+  // noStore(); // Disables Next.js caching for this fetch - REMOVED TO ALLOW STATIC EXPORT
 
-  return client.fetch<T>(query, params);
+  return client.fetch<T>(query, params, {
+    // We add a `next.revalidate` tag to bust the cache when new content is published
+    // You will need to configure a webhook in Sanity to trigger this revalidation
+    next: {
+      tags: ['sanity-content'],
+    },
+  });
 }
