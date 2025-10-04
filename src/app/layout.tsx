@@ -6,8 +6,6 @@ import Footer from "@/components/footer";
 import SpotlightCursor from "@/components/spotlight-cursor";
 import { siteConfig } from '@/config/site';
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
