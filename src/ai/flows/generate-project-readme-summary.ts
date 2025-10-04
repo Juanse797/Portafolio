@@ -1,5 +1,3 @@
-// src/ai/flows/generate-project-readme-summary.ts
-'use server';
 
 /**
  * @fileOverview Summarizes a project's README.md content using GenAI.
