@@ -1,8 +1,11 @@
 import 'dotenv/config';
 import type {NextConfig} from 'next';
 
+/** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  /* config options here */
+  // basePath: '/nombre-del-repo', // Descomenta y reemplaza 'nombre-del-repo' con el nombre de tu repositorio de GitHub
+  // output: 'export', // Descomenta esta línea para habilitar la exportación estática para GitHub Pages
+
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -10,6 +13,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    unoptimized: true, // Necesario para la exportación estática con `output: 'export'`
     remotePatterns: [
       {
         protocol: 'https',
