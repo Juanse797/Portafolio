@@ -27,10 +27,19 @@ export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModa
   useEffect(() => {
     const fetchSummary = async () => {
       if (!isOpen || !project.description) return;
+      
+      const aiApiUrl = process.env.NEXT_PUBLIC_AI_API_URL;
+
+      if (!aiApiUrl) {
+        console.warn('AI API URL is not configured. AI Summary will not be available.');
+        setSummary('The AI summary feature is not configured for this site. Please check the project README instead.');
+        setIsSummaryLoading(false);
+        return;
+      }
 
       setIsSummaryLoading(true);
       try {
-        const response = await fetch('/api/summary', {
+        const response = await fetch(aiApiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -39,14 +48,14 @@ export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModa
         });
 
         if (!response.ok) {
-          throw new Error('Failed to fetch summary');
+          throw new Error('Failed to fetch summary from the AI endpoint.');
         }
 
         const result = await response.json();
         setSummary(result.summary);
       } catch (error) {
         console.error('Error generating README summary:', error);
-        setSummary('Could not generate summary at this time. Please try again later.');
+        setSummary('Could not generate summary at this time. Please check the project README instead.');
       } finally {
         setIsSummaryLoading(false);
       }
