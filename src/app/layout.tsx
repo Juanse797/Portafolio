@@ -61,9 +61,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
-  // Use absolute paths for favicons to avoid basepath issues
-  const basePath = isGithubActions ? 'https://juanse797.github.io/Portafolio' : '';
 
   return (
     <html lang="en" className="dark font-body antialiased">
@@ -71,8 +68,6 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
-        <link rel="icon" href={`${basePath}/favicon.ico`} sizes="any" />
-        <link rel="apple-touch-icon" href={`${basePath}/apple-touch-icon.png`} />
       </head>
       <body className="bg-background text-foreground">
         <SpotlightCursor />
