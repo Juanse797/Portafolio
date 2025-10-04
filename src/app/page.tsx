@@ -7,10 +7,6 @@ import SkillsSection from '@/components/sections/skills';
 import ContactSection from '@/components/sections/contact';
 import ProjectCardSkeleton from '@/components/project-card-skeleton';
 
-// Force reload to fetch new Sanity data
-export const revalidate = 0;
-export const dynamic = 'force-dynamic';
-
 export default function Home() {
   const skeletonCount = 3;
 

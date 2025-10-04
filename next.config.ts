@@ -1,10 +1,14 @@
 import 'dotenv/config';
 import type {NextConfig} from 'next';
 
+const isGithubActions = process.env.GITHUB_ACTIONS === 'true'
+
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  basePath: '/Portafolio', // The name of your GitHub repository
   output: 'export', // Enables static export for GitHub Pages
+  
+  // Set basePath only for GitHub Pages deployment
+  basePath: isGithubActions ? '/Portafolio' : '',
 
   typescript: {
     ignoreBuildErrors: true,
