@@ -1,4 +1,4 @@
-import { sanityFetch } from '@/lib/sanity';
+import { client, urlFor } from '@/lib/sanity';
 import type { Project } from '@/types';
 import ProjectCard from '../project-card';
 import { ScrollReveal } from '../scroll-reveal';
@@ -15,7 +15,7 @@ const PROJECTS_QUERY = `*[_type == "project"]|order(order asc){
 }`;
 
 export default async function ProjectsSection() {
-  const projects = await sanityFetch<Project[]>({ query: PROJECTS_QUERY });
+  const projects = await client.fetch<Project[]>(PROJECTS_QUERY);
 
   return (
     <section id="projects" className="py-20 sm:py-32">
