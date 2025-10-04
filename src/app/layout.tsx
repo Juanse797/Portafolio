@@ -49,8 +49,8 @@ export const metadata: Metadata = {
   },
   authors: [{ name: siteConfig.author }],
   icons: {
-    icon: `${basePath}/favicon.ico`,
-    apple: `${basePath}/apple-touch-icon.png`,
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
 };
 
