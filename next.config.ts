@@ -3,8 +3,8 @@ import type {NextConfig} from 'next';
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  // basePath: '/nombre-del-repo', // Descomenta y reemplaza 'nombre-del-repo' con el nombre de tu repositorio de GitHub
-  // output: 'export', // Descomenta esta línea para habilitar la exportación estática para GitHub Pages
+  basePath: '/Portafolio', // Descomenta y reemplaza 'nombre-del-repo' con el nombre de tu repositorio de GitHub
+  output: 'export', // Descomenta esta línea para habilitar la exportación estática para GitHub Pages
 
   typescript: {
     ignoreBuildErrors: true,
