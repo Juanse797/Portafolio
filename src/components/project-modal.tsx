@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import type { Project } from '@/types';
 import { urlFor } from '@/lib/sanity';
-import { getReadmeSummary } from '@/app/actions';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 type ProjectModalProps = {
@@ -27,15 +26,33 @@ export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModa
 
   useEffect(() => {
     const fetchSummary = async () => {
+      if (!isOpen || !project.description) return;
+
       setIsSummaryLoading(true);
-      const result = await getReadmeSummary(project.description);
-      setSummary(result);
-      setIsSummaryLoading(false);
+      try {
+        const response = await fetch('/api/summary', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ readmeContent: project.description }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch summary');
+        }
+
+        const result = await response.json();
+        setSummary(result.summary);
+      } catch (error) {
+        console.error('Error generating README summary:', error);
+        setSummary('Could not generate summary at this time. Please try again later.');
+      } finally {
+        setIsSummaryLoading(false);
+      }
     };
 
-    if (isOpen) {
-      fetchSummary();
-    }
+    fetchSummary();
   }, [isOpen, project.description]);
 
   const memoizedMarkdown = useMemo(() => (
