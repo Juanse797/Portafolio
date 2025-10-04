@@ -1,13 +1,15 @@
 import type {NextConfig} from 'next';
 
 const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
+const repoName = '/Portafolio';
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
   output: 'export',
   
-  // Statically set basePath for GitHub Pages deployment
-  basePath: isGithubActions ? '/Portafolio' : '',
+  // Statically set basePath and assetPrefix for GitHub Pages deployment
+  basePath: isGithubActions ? repoName : '',
+  assetPrefix: isGithubActions ? `${repoName}/` : undefined,
 
   typescript: {
     ignoreBuildErrors: true,
@@ -45,7 +47,7 @@ const nextConfig: NextConfig = {
     ],
   },
   env: {
-    NEXT_PUBLIC_BASE_PATH: isGithubActions ? '/Portafolio' : '',
+    NEXT_PUBLIC_BASE_PATH: isGithubActions ? repoName : '',
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
     NEXT_PUBLIC_SANITY_API_VERSION: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
