@@ -1,13 +1,11 @@
 import type {NextConfig} from 'next';
 
-const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
-
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
   output: 'export',
   
-  // Set basePath only for GitHub Pages deployment
-  basePath: isGithubActions ? '/Portafolio' : '',
+  // Statically set basePath for GitHub Pages deployment
+  basePath: '/Portafolio',
 
   typescript: {
     ignoreBuildErrors: true,
