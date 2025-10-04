@@ -1,4 +1,3 @@
-
 import { Suspense } from 'react';
 import HeroSection from '@/components/sections/hero';
 import ProjectsSection from '@/components/sections/projects';
