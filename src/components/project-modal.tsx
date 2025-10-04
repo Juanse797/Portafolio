@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Github, ExternalLink, Bot, FileText, Loader2 } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import type { Project } from '@/types';
@@ -20,49 +19,7 @@ type ProjectModalProps = {
 };
 
 export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModalProps) {
-  const [summary, setSummary] = useState<string | null>(null);
-  const [isSummaryLoading, setIsSummaryLoading] = useState(true);
   const imageUrl = project.image ? urlFor(project.image).url() : 'https://placehold.co/800x600';
-
-  useEffect(() => {
-    const fetchSummary = async () => {
-      if (!isOpen || !project.description) return;
-      
-      const aiApiUrl = process.env.NEXT_PUBLIC_AI_API_URL;
-
-      if (!aiApiUrl) {
-        console.warn('AI API URL is not configured. AI Summary will not be available.');
-        setSummary('The AI summary feature is not configured for this site. Please check the project README instead.');
-        setIsSummaryLoading(false);
-        return;
-      }
-
-      setIsSummaryLoading(true);
-      try {
-        const response = await fetch(aiApiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ readmeContent: project.description }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch summary from the AI endpoint.');
-        }
-
-        const result = await response.json();
-        setSummary(result.summary);
-      } catch (error) {
-        console.error('Error generating README summary:', error);
-        setSummary('Could not generate summary at this time. Please check the project README instead.');
-      } finally {
-        setIsSummaryLoading(false);
-      }
-    };
-
-    fetchSummary();
-  }, [isOpen, project.description]);
 
   const memoizedMarkdown = useMemo(() => (
     <ReactMarkdown remarkPlugins={[remarkGfm]} className="markdown-content">
@@ -70,12 +27,6 @@ export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModa
     </ReactMarkdown>
   ), [project.description]);
   
-  const memoizedSummary = useMemo(() => (
-    <ReactMarkdown remarkPlugins={[remarkGfm]} className="markdown-content">
-      {summary || ''}
-    </ReactMarkdown>
-  ), [summary]);
-
   if (!isOpen) return null;
 
   return (
@@ -119,26 +70,11 @@ export default function ProjectModal({ project, isOpen, setIsOpen }: ProjectModa
             </div>
           </div>
 
-          <Tabs defaultValue="summary" className="w-full flex flex-col min-h-0">
-            <TabsList className="grid w-full grid-cols-2 bg-muted/50">
-              <TabsTrigger value="summary"><Bot className="mr-2 h-4 w-4"/> AI Summary</TabsTrigger>
-              <TabsTrigger value="readme"><FileText className="mr-2 h-4 w-4"/> README</TabsTrigger>
-            </TabsList>
-            <ScrollArea className="flex-1 mt-2 pr-4">
-              <TabsContent value="summary" className="mt-0">
-                {isSummaryLoading ? (
-                  <div className="flex items-center justify-center h-48">
-                    <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                  </div>
-                ) : (
-                  memoizedSummary
-                )}
-              </TabsContent>
-              <TabsContent value="readme" className="mt-0">
+          <ScrollArea className="flex-1 mt-2 pr-4">
+            <div className="markdown-content">
                 {memoizedMarkdown}
-              </TabsContent>
-            </ScrollArea>
-          </Tabs>
+            </div>
+          </ScrollArea>
         </div>
       </DialogContent>
     </Dialog>
