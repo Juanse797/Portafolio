@@ -13,7 +13,6 @@ export async function sanityFetch<T>({
   query: string;
   params?: Record<string, any>;
 }): Promise<T> {
-  // noStore(); // Disables Next.js caching for this fetch - REMOVED TO ALLOW STATIC EXPORT
 
   return client.fetch<T>(query, params, {
     // We add a `next.revalidate` tag to bust the cache when new content is published
