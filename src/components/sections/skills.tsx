@@ -27,12 +27,12 @@ export default function SkillsSection() {
       <div className="container mx-auto px-4">
         {/* Section header */}
         <div className="max-w-3xl mx-auto text-center mb-10">
-          <ScrollReveal>
+          <ScrollReveal direction="down">
             <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-sm font-medium text-primary mb-6">
               Tech Stack
             </span>
           </ScrollReveal>
-          <ScrollReveal delay={100}>
+          <ScrollReveal delay={150} direction="fade" duration={900}>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-balance">
               Tools & technologies I{' '}
               <span className="text-primary">work with</span>
@@ -43,7 +43,7 @@ export default function SkillsSection() {
         {/* Skills grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
           {skillsList.map((skill, index) => (
-            <ScrollReveal key={skill.name} delay={index * 80}>
+            <ScrollReveal key={skill.name} delay={index * 100} direction="scale" duration={600}>
               <div className="group relative flex flex-col items-center gap-4 p-6 rounded-2xl border border-border/50 bg-card/30 backdrop-blur-sm hover:border-primary/30 hover:bg-card/60 transition-all duration-500">
                 <div className="relative w-12 h-12 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                   <skill.icon className="w-full h-full object-contain" />

@@ -118,14 +118,15 @@
   .nav-glow-border {
     background: linear-gradient(
       90deg,
-      hsl(var(--foreground) / 0.03) 0%,
-      hsl(var(--foreground) / 0.15) 15%,
-      hsl(var(--foreground) / 0.35) 35%,
-      hsl(var(--foreground) / 0.5) 50%,
-      hsl(var(--foreground) / 0.35) 65%,
-      hsl(var(--foreground) / 0.15) 85%,
-      hsl(var(--foreground) / 0.03) 100%
+      hsl(var(--foreground) / 0.15) 0%,
+      hsl(var(--foreground) / 0.4) 10%,
+      hsl(var(--foreground) / 0.6) 25%,
+      hsl(var(--foreground) / 0.8) 50%,
+      hsl(var(--foreground) / 0.6) 75%,
+      hsl(var(--foreground) / 0.4) 90%,
+      hsl(var(--foreground) / 0.15) 100%
     );
+    box-shadow: 0 0 8px hsl(var(--foreground) / 0.08), 0 0 20px hsl(var(--foreground) / 0.04);
   }
 
   /* Static glow for active nav item */
