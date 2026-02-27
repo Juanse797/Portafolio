@@ -1,19 +1,13 @@
-import type { Image } from 'sanity';
-
 export interface Project {
-  _id: string;
+  id: string;
   title: string;
-  image: Image;
+  short_description: string;
   description: string;
-  shortDescription: string;
+  image_url: string;
   tags: string[];
-  githubLink: string;
-  demoLink?: string;
-}
-
-export interface About {
-  _id: string;
-  heading: string;
-  paragraph1: string;
-  paragraph2: string;
+  github_link: string;
+  demo_link?: string | null;
+  display_order: number;
+  created_at: string;
+  updated_at: string;
 }

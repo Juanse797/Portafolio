@@ -1,12 +1,10 @@
 import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import SpotlightCursor from "@/components/spotlight-cursor";
 import { siteConfig } from '@/config/site';
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -49,8 +47,8 @@ export const metadata: Metadata = {
   },
   authors: [{ name: siteConfig.author }],
   icons: {
-    icon: `${basePath}/favicon.ico`,
-    apple: `${basePath}/apple-touch-icon.png`,
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
 };
 
@@ -63,19 +61,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
-    <html lang="en" className="dark font-body antialiased">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
-      </head>
-      <body className="bg-background text-foreground">
-        <SpotlightCursor />
-        <Header />
-        <main>{children}</main>
-        <Footer />
+    <html lang="en" className={`dark ${inter.variable} antialiased`}>
+      <body className="bg-background text-foreground font-sans">
+        {children}
         <Toaster />
       </body>
     </html>
