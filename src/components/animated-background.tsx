@@ -102,6 +102,8 @@ export default function AnimatedBackground() {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     const primaryR = 255, primaryG = 0, primaryB = 51;
+    // Soft neutral for subtle connections/neurons on dark-modern bg
+    const softR = 160, softG = 165, softB = 180;
     const mouseRadius = 250;
 
     const animate = () => {
@@ -151,19 +153,23 @@ export default function AnimatedBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist > 300) continue;
 
-          const baseOpacity = (1 - dist / 300) * 0.08;
+          const baseOpacity = (1 - dist / 300) * 0.12;
 
           // Mouse proximity boost
           const midX = (a.x + b.x) / 2;
           const midY = (ay + by) / 2;
           const mouseDist = Math.sqrt((mouse.x - midX) ** 2 + (mouse.y - midY) ** 2);
-          const mouseBoost = mouseDist < mouseRadius ? (1 - mouseDist / mouseRadius) * 0.25 : 0;
+          const mouseBoost = mouseDist < mouseRadius ? (1 - mouseDist / mouseRadius) : 0;
 
           ctx.beginPath();
           ctx.moveTo(a.x, ay);
           ctx.lineTo(b.x, by);
-          ctx.strokeStyle = `rgba(${primaryR}, ${primaryG}, ${primaryB}, ${baseOpacity + mouseBoost})`;
-          ctx.lineWidth = 0.5;
+          // Blend from soft neutral to primary red near mouse
+          const r = Math.round(softR + (primaryR - softR) * mouseBoost);
+          const g = Math.round(softG + (primaryG - softG) * mouseBoost);
+          const b2 = Math.round(softB + (primaryB - softB) * mouseBoost);
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b2}, ${baseOpacity + mouseBoost * 0.25})`;
+          ctx.lineWidth = 0.5 + mouseBoost * 0.5;
           ctx.stroke();
         }
       }
@@ -230,10 +236,13 @@ export default function AnimatedBackground() {
           ctx.fill();
         }
 
-        // Core neuron dot
+        // Core neuron dot - blend from soft to primary near mouse
+        const nr = Math.round(softR + (primaryR - softR) * mouseInfluence);
+        const ng = Math.round(softG + (primaryG - softG) * mouseInfluence);
+        const nb = Math.round(softB + (primaryB - softB) * mouseInfluence);
         ctx.beginPath();
         ctx.arc(n.x, ny, finalRadius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${primaryR}, ${primaryG}, ${primaryB}, ${finalOpacity})`;
+        ctx.fillStyle = `rgba(${nr}, ${ng}, ${nb}, ${finalOpacity})`;
         ctx.fill();
 
         // Subtle movement
