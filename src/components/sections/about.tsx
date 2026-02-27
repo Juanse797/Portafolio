@@ -32,18 +32,18 @@ export default function AboutSection() {
       <div className="container mx-auto px-4">
         {/* Section header */}
         <div className="max-w-3xl mx-auto text-center mb-10">
-          <ScrollReveal>
+          <ScrollReveal direction="down">
             <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-sm font-medium text-primary mb-6">
               About Me
             </span>
           </ScrollReveal>
-          <ScrollReveal delay={100}>
+          <ScrollReveal delay={150} direction="fade" duration={900}>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-balance">
               Passionate about turning{' '}
               <span className="text-primary">data into intelligence</span>
             </h2>
           </ScrollReveal>
-          <ScrollReveal delay={200}>
+          <ScrollReveal delay={300} direction="up">
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
               I am a dedicated Machine Learning Engineer with a fascination for data and its power to uncover hidden patterns. I specialize in developing, deploying, and maintaining robust ML models, from natural language processing to computer vision.
             </p>
@@ -53,7 +53,7 @@ export default function AboutSection() {
         {/* Feature cards in Pointer AI bento style */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {highlights.map((item, index) => (
-            <ScrollReveal key={item.title} delay={index * 100}>
+            <ScrollReveal key={item.title} delay={index * 120} direction={index % 2 === 0 ? 'left' : 'right'} duration={800}>
               <div className="group relative p-8 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:bg-card/80 transition-all duration-500">
                 <div className="flex items-start gap-5">
                   <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">

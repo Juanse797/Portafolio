@@ -31,18 +31,18 @@ export default function ContactSection() {
       <div className="container mx-auto px-4 max-w-3xl">
         {/* Section header */}
         <div className="text-center mb-10">
-          <ScrollReveal>
+          <ScrollReveal direction="down">
             <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-sm font-medium text-primary mb-6">
               Get in Touch
             </span>
           </ScrollReveal>
-          <ScrollReveal delay={100}>
+          <ScrollReveal delay={150} direction="fade" duration={900}>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-balance">
               {"Let's build something"}{' '}
               <span className="text-primary">together</span>
             </h2>
           </ScrollReveal>
-          <ScrollReveal delay={200}>
+          <ScrollReveal delay={300} direction="up">
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
               {"I'm always open to new challenges and opportunities. If you'd like to learn more about my work or discuss potential collaborations, feel free to reach out."}
             </p>
@@ -50,7 +50,7 @@ export default function ContactSection() {
         </div>
 
         {/* Contact cards */}
-        <ScrollReveal delay={300}>
+        <ScrollReveal delay={400} direction="scale" duration={800}>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {socialLinks.map((link) => (
               <a
