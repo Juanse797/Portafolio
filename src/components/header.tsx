@@ -85,19 +85,6 @@ export default function Header() {
           </div>
         </nav>
 
-        {/* Right: Get in Touch button (desktop) */}
-        <a
-          href="#contact"
-          onClick={(e) => handleScroll(e, 'contact')}
-          className="hidden md:inline-flex items-center gap-2 rounded-full border border-border/30 bg-background/40 backdrop-blur-md px-5 py-2 text-sm font-medium text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary/50 transition-all duration-300"
-        >
-          Get in Touch
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1">
-            <path d="M7 17L17 7" />
-            <path d="M7 7h10v10" />
-          </svg>
-        </a>
-
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -134,17 +121,7 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <a
-            href="#contact"
-            onClick={(e) => handleScroll(e, 'contact')}
-            className="mt-4 flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-3 text-sm font-medium hover:bg-primary/90 transition-colors"
-          >
-            Get in Touch
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M7 17L17 7" />
-              <path d="M7 7h10v10" />
-            </svg>
-          </a>
+
         </div>
       </div>
     </header>
