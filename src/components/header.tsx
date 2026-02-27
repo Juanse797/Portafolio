@@ -67,7 +67,7 @@ export default function Header() {
         {/* Left: Nav links inside a pill container */}
         <nav className="hidden md:block">
           <div className="nav-glow-border rounded-full p-[1px]">
-            <div className="flex items-center gap-1 rounded-full bg-background/60 backdrop-blur-md px-2 py-1.5">
+            <div className="flex items-center gap-1 rounded-full bg-background px-2 py-1.5">
               {navLinks.map((link) => (
                 <a
                   key={link.id}
@@ -76,7 +76,7 @@ export default function Header() {
                   className={cn(
                     'relative px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-300',
                     activeSection === link.id
-                      ? 'text-primary-foreground bg-primary'
+                      ? 'text-foreground bg-foreground/10'
                       : 'text-muted-foreground hover:text-foreground'
                   )}
                 >
@@ -114,7 +114,7 @@ export default function Header() {
                   className={cn(
                     'block py-3 px-4 text-sm font-medium rounded-lg transition-all duration-200',
                     activeSection === link.id
-                      ? 'text-primary-foreground bg-primary'
+                      ? 'text-foreground bg-foreground/10'
                       : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
                   )}
                 >
