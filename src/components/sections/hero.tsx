@@ -64,7 +64,7 @@ export default function HeroSection() {
       <AnimatedGridBackground />
       <FloatingParticles />
 
-      <div className="container mx-auto px-4 py-32">
+      <div className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto text-center">
           {/* Animated badge */}
           <div
@@ -142,7 +142,7 @@ export default function HeroSection() {
           {/* Stats row */}
           <div
             className={cn(
-              'mt-16 flex items-center justify-center gap-8 md:gap-16 transition-all duration-700 delay-700',
+              'mt-10 flex items-center justify-center gap-8 md:gap-16 transition-all duration-700 delay-700',
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             )}
           >

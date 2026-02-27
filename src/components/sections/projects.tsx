@@ -6,10 +6,10 @@ import { ScrollReveal } from '../scroll-reveal';
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="relative py-24 sm:py-32">
+    <section id="projects" className="relative py-14 sm:py-20">
       <div className="container mx-auto px-4">
         {/* Section header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="max-w-3xl mx-auto text-center mb-10">
           <ScrollReveal>
             <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-sm font-medium text-primary mb-6">
               Portfolio
