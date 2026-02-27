@@ -2,8 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { urlFor } from '@/lib/sanity';
-import type { Project } from '@/types';
+import type { Project } from '@/data/projects';
 import { Badge } from '@/components/ui/badge';
 import { ArrowUpRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -16,7 +15,6 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const imageUrl = project.image ? urlFor(project.image).width(600).height(400).url() : 'https://placehold.co/600x400';
 
   return (
     <>
@@ -31,7 +29,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Image */}
         <div className="relative overflow-hidden aspect-[3/2]">
           <Image
-            src={imageUrl}
+            src={project.image}
             alt={project.title}
             width={600}
             height={400}
@@ -66,13 +64,21 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Hover glow */}
-        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        <div
+          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
           style={{
-            background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--primary) / 0.06), transparent 40%)',
+            background:
+              'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--primary) / 0.06), transparent 40%)',
           }}
         />
       </div>
-      {isModalOpen && <ProjectModal project={project} isOpen={isModalOpen} setIsOpen={setIsModalOpen} />}
+      {isModalOpen && (
+        <ProjectModal
+          project={project}
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+        />
+      )}
     </>
   );
 }

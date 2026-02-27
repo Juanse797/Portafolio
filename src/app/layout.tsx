@@ -9,8 +9,6 @@ import { siteConfig } from '@/config/site';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -52,8 +50,8 @@ export const metadata: Metadata = {
   },
   authors: [{ name: siteConfig.author }],
   icons: {
-    icon: `${basePath}/favicon.ico`,
-    apple: `${basePath}/apple-touch-icon.png`,
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
 };
 
