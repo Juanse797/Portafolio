@@ -4,7 +4,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import SpotlightCursor from "@/components/spotlight-cursor";
+import AnimatedBackground from "@/components/animated-background";
 import { siteConfig } from '@/config/site';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -67,7 +67,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${inter.variable} antialiased`}>
       <body className="bg-background text-foreground font-sans">
-        <SpotlightCursor />
+        <AnimatedBackground />
         <Header />
         <main>{children}</main>
         <Footer />
