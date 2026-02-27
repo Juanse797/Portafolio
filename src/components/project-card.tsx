@@ -2,11 +2,9 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { urlFor } from '@/lib/sanity';
-import type { Project } from '@/types';
+import type { Project } from '@/data/projects';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
+import { ArrowUpRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 const ProjectModal = dynamic(() => import('./project-modal'));
@@ -17,49 +15,70 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const imageUrl = project.image ? urlFor(project.image).width(600).height(400).url() : 'https://placehold.co/600x400';
-
 
   return (
     <>
-      <Card
-        className="group relative overflow-hidden rounded-xl border-white/20 bg-card/80 transition-all duration-300 ease-out hover:scale-105 hover:shadow-glow-lg focus-within:scale-105 focus-within:shadow-glow-lg"
+      <div
+        className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/30 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 cursor-pointer"
         onClick={() => setIsModalOpen(true)}
         onKeyDown={(e) => e.key === 'Enter' && setIsModalOpen(true)}
         tabIndex={0}
         role="button"
         aria-label={`View details for ${project.title}`}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-        <div 
-            className={cn(
-              "absolute inset-0 rounded-xl transition-all duration-300",
-              "shadow-[0_0_0px_rgba(255,0,51,0)] group-hover:shadow-[0_0_15px_rgba(255,0,51,0.5)] group-focus-within:shadow-[0_0_15px_rgba(255,0,51,0.5)]"
-            )}
-          />
-        
-        <CardHeader className="relative z-10 p-4">
-          <CardTitle className="text-xl font-bold">{project.title}</CardTitle>
-        </CardHeader>
-        <CardContent className="relative z-10 p-4 pt-0">
+        {/* Image */}
+        <div className="relative overflow-hidden aspect-[3/2]">
           <Image
-            src={imageUrl}
+            src={project.image}
             alt={project.title}
             width={600}
             height={400}
-            className="w-full h-auto rounded-lg mb-4 object-cover"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <p className="text-muted-foreground text-sm mb-4 h-10">{project.shortDescription}</p>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+          {/* Arrow indicator */}
+          <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0 group-hover:-translate-y-0 translate-x-2 -translate-y-2">
+            <ArrowUpRight className="w-4 h-4 text-primary" />
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+            {project.title}
+          </h3>
+          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+            {project.shortDescription}
+          </p>
           <div className="flex flex-wrap gap-2">
             {project.tags?.slice(0, 4).map((tag) => (
-              <Badge key={tag} variant="secondary" className="bg-primary/20 text-primary-foreground/80 border-primary/30">
+              <Badge
+                key={tag}
+                variant="secondary"
+                className="bg-primary/10 text-primary border-primary/20 text-xs font-medium"
+              >
                 {tag}
               </Badge>
             ))}
           </div>
-        </CardContent>
-      </Card>
-      {isModalOpen && <ProjectModal project={project} isOpen={isModalOpen} setIsOpen={setIsModalOpen} />}
+        </div>
+
+        {/* Hover glow */}
+        <div
+          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--primary) / 0.06), transparent 40%)',
+          }}
+        />
+      </div>
+      {isModalOpen && (
+        <ProjectModal
+          project={project}
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+        />
+      )}
     </>
   );
 }
