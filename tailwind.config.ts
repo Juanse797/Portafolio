@@ -17,8 +17,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        headline: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
@@ -107,6 +108,10 @@ export default {
         shimmer: {
           'from': { 'background-position': '200% 0' },
           'to': { 'background-position': '-200% 0' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0) scale(1)', opacity: '0.3' },
+          '50%': { transform: 'translateY(-20px) scale(1.5)', opacity: '0.8' },
         }
       },
       animation: {
@@ -114,6 +119,7 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'aurora': 'aurora 45s ease infinite',
         'shimmer': 'shimmer 1.5s linear infinite',
+        'float': 'float 4s ease-in-out infinite',
       },
     },
   },
