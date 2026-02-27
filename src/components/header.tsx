@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { siteConfig } from '@/config/site';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
@@ -65,17 +64,7 @@ export default function Header() {
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-6 py-5">
-        {/* Logo */}
-        <a
-          href="#home"
-          onClick={(e) => handleScroll(e, 'home')}
-          className="text-lg font-bold text-foreground tracking-tight hover:text-primary transition-colors"
-        >
-          {siteConfig.name.split(' ')[0]}
-          <span className="text-primary">.</span>
-        </a>
-
-        {/* Desktop Nav */}
+        {/* Desktop Nav - Left aligned */}
         <nav className="hidden md:block">
           <ul className="flex items-center gap-8">
             {navLinks.map((link) => (
@@ -97,22 +86,14 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* CTA + Mobile Toggle */}
-        <div className="flex items-center gap-4">
-          <a
-            href={siteConfig.links.email}
-            className="hidden md:inline-flex px-5 py-2 text-sm font-medium rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            Contact
-          </a>
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
+        {/* Mobile Toggle */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
 
       {/* Mobile menu */}
