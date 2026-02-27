@@ -66,22 +66,24 @@ export default function Header() {
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Left: Nav links inside a pill container */}
         <nav className="hidden md:block">
-          <div className="flex items-center gap-1 rounded-full border border-border/30 bg-background/40 backdrop-blur-md px-2 py-1.5">
-            {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={(e) => handleScroll(e, link.id)}
-                className={cn(
-                  'relative px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-300',
-                  activeSection === link.id
-                    ? 'text-primary-foreground bg-primary'
-                    : 'text-muted-foreground hover:text-foreground'
-                )}
-              >
-                {link.name}
-              </a>
-            ))}
+          <div className="nav-pill-border relative rounded-full p-[1px]">
+            <div className="flex items-center gap-1 rounded-full bg-background/50 backdrop-blur-md px-2 py-1.5">
+              {navLinks.map((link) => (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  onClick={(e) => handleScroll(e, link.id)}
+                  className={cn(
+                    'relative px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-300',
+                    activeSection === link.id
+                      ? 'text-primary-foreground bg-primary'
+                      : 'text-muted-foreground hover:text-foreground'
+                  )}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
           </div>
         </nav>
 

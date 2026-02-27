@@ -34,7 +34,7 @@ export default function AnimatedBackground() {
   const initNeurons = useCallback((width: number, height: number) => {
     // Create neurons spread across the full page height (not just viewport)
     const fullHeight = Math.max(document.body.scrollHeight, height * 5);
-    const count = Math.min(Math.floor((width * fullHeight) / 40000), 200);
+    const count = Math.min(Math.floor((width * fullHeight) / 18000), 400);
     const neurons: Neuron[] = [];
 
     for (let i = 0; i < count; i++) {
@@ -61,10 +61,10 @@ export default function AnimatedBackground() {
         distances.push({ idx: j, dist: Math.sqrt(dx * dx + dy * dy) });
       }
       distances.sort((a, b) => a.dist - b.dist);
-      const connCount = 2 + Math.floor(Math.random() * 3);
+      const connCount = 3 + Math.floor(Math.random() * 4);
       neurons[i].connections = distances
         .slice(0, connCount)
-        .filter((d) => d.dist < 300)
+        .filter((d) => d.dist < 350)
         .map((d) => d.idx);
     }
 
@@ -119,7 +119,7 @@ export default function AnimatedBackground() {
       const mouse = mouseRef.current;
 
       // Spawn new signals randomly
-      if (timeRef.current % 8 === 0 && signals.length < 30) {
+      if (timeRef.current % 4 === 0 && signals.length < 50) {
         const fromIdx = Math.floor(Math.random() * neurons.length);
         const neuron = neurons[fromIdx];
         if (neuron.connections.length > 0) {
@@ -151,9 +151,9 @@ export default function AnimatedBackground() {
           const dx = a.x - b.x;
           const dy = ay - by;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist > 300) continue;
+          if (dist > 350) continue;
 
-          const baseOpacity = (1 - dist / 300) * 0.12;
+          const baseOpacity = (1 - dist / 350) * 0.14;
 
           // Mouse proximity boost
           const midX = (a.x + b.x) / 2;
