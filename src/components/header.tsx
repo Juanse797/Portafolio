@@ -66,7 +66,8 @@ export default function Header() {
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Left: Nav links inside a pill container */}
         <nav className="hidden md:block">
-          <div className="flex items-center gap-1 rounded-full border border-foreground/20 bg-background/50 backdrop-blur-md px-2 py-1.5">
+          <div className="nav-glow-border rounded-full p-[1px]">
+            <div className="flex items-center gap-1 rounded-full bg-background/60 backdrop-blur-md px-2 py-1.5">
               {navLinks.map((link) => (
                 <a
                   key={link.id}
@@ -82,6 +83,7 @@ export default function Header() {
                   {link.name}
                 </a>
               ))}
+            </div>
           </div>
         </nav>
 

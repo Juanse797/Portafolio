@@ -114,6 +114,20 @@
   .markdown-content th, .markdown-content td { @apply border border-border px-4 py-2; }
   .markdown-content th { @apply bg-muted; }
 
+  /* Glowing white light gradient border for nav pill */
+  .nav-glow-border {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--foreground) / 0.03) 0%,
+      hsl(var(--foreground) / 0.15) 15%,
+      hsl(var(--foreground) / 0.35) 35%,
+      hsl(var(--foreground) / 0.5) 50%,
+      hsl(var(--foreground) / 0.35) 65%,
+      hsl(var(--foreground) / 0.15) 85%,
+      hsl(var(--foreground) / 0.03) 100%
+    );
+  }
+
   /* Static glow for active nav item */
   .nav-active-glow {
     box-shadow: 0 0 15px hsl(var(--primary) / 0.6);
