@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    --background: 220 15% 6%;
+    --background: 220 14% 5%;
     --foreground: 220 10% 93%;
-    --card: 220 14% 9%;
+    --card: 220 13% 7.5%;
     --card-foreground: 220 10% 93%;
-    --popover: 220 15% 8%;
+    --popover: 220 14% 6.5%;
     --popover-foreground: 220 10% 93%;
     --primary: 348 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 12% 13%;
+    --secondary: 220 12% 11%;
     --secondary-foreground: 220 10% 95%;
-    --muted: 220 12% 13%;
+    --muted: 220 12% 11%;
     --muted-foreground: 220 8% 55%;
-    --accent: 220 12% 13%;
+    --accent: 220 12% 11%;
     --accent-foreground: 220 10% 95%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 12% 15%;
-    --input: 220 12% 13%;
+    --border: 220 12% 13%;
+    --input: 220 12% 11%;
     --ring: 348 100% 50%;
     --radius: 0.75rem;
     --chart-1: 12 76% 61%;
@@ -29,13 +29,13 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --sidebar-background: 220 15% 7%;
+    --sidebar-background: 220 14% 5.5%;
     --sidebar-foreground: 220 10% 93%;
     --sidebar-primary: 348 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 12% 13%;
+    --sidebar-accent: 220 12% 11%;
     --sidebar-accent-foreground: 220 10% 93%;
-    --sidebar-border: 220 12% 15%;
+    --sidebar-border: 220 12% 13%;
     --sidebar-ring: 348 100% 50%;
   }
 
@@ -113,6 +113,20 @@
   .markdown-content table { @apply w-full my-4 border-collapse; }
   .markdown-content th, .markdown-content td { @apply border border-border px-4 py-2; }
   .markdown-content th { @apply bg-muted; }
+
+  /* Glowing white light gradient border for nav pill */
+  .nav-glow-border {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--foreground) / 0.03) 0%,
+      hsl(var(--foreground) / 0.15) 15%,
+      hsl(var(--foreground) / 0.35) 35%,
+      hsl(var(--foreground) / 0.5) 50%,
+      hsl(var(--foreground) / 0.35) 65%,
+      hsl(var(--foreground) / 0.15) 85%,
+      hsl(var(--foreground) / 0.03) 100%
+    );
+  }
 
   /* Static glow for active nav item */
   .nav-active-glow {
