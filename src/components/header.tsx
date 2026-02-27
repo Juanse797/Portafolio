@@ -59,32 +59,44 @@ export default function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         scrolled
-          ? 'bg-background/70 backdrop-blur-lg border-b border-border/10'
+          ? 'bg-background/60 backdrop-blur-xl'
           : 'bg-transparent'
       )}
     >
-      <div className="container mx-auto flex items-center justify-between px-6 py-5">
-        {/* Desktop Nav - Left aligned */}
+      <div className="container mx-auto flex items-center justify-between px-6 py-4">
+        {/* Left: Nav links inside a pill container */}
         <nav className="hidden md:block">
-          <ul className="flex items-center gap-8">
+          <div className="flex items-center gap-1 rounded-full border border-border/30 bg-background/40 backdrop-blur-md px-2 py-1.5">
             {navLinks.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  onClick={(e) => handleScroll(e, link.id)}
-                  className={cn(
-                    'text-sm font-medium transition-colors duration-300',
-                    activeSection === link.id
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-foreground'
-                  )}
-                >
-                  {link.name}
-                </a>
-              </li>
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => handleScroll(e, link.id)}
+                className={cn(
+                  'relative px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-300',
+                  activeSection === link.id
+                    ? 'text-primary-foreground bg-primary'
+                    : 'text-muted-foreground hover:text-foreground'
+                )}
+              >
+                {link.name}
+              </a>
             ))}
-          </ul>
+          </div>
         </nav>
+
+        {/* Right: Get in Touch button (desktop) */}
+        <a
+          href="#contact"
+          onClick={(e) => handleScroll(e, 'contact')}
+          className="hidden md:inline-flex items-center gap-2 rounded-full border border-border/30 bg-background/40 backdrop-blur-md px-5 py-2 text-sm font-medium text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary/50 transition-all duration-300"
+        >
+          Get in Touch
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1">
+            <path d="M7 17L17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </a>
 
         {/* Mobile Toggle */}
         <button
@@ -100,10 +112,10 @@ export default function Header() {
       <div
         className={cn(
           'md:hidden overflow-hidden transition-all duration-300',
-          mobileOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+          mobileOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         )}
       >
-        <div className="bg-background/95 backdrop-blur-lg border-t border-border/10 px-6 py-4">
+        <div className="bg-background/95 backdrop-blur-xl border-t border-border/10 px-6 py-4">
           <ul className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <li key={link.id}>
@@ -111,10 +123,10 @@ export default function Header() {
                   href={`#${link.id}`}
                   onClick={(e) => handleScroll(e, link.id)}
                   className={cn(
-                    'block py-3 text-sm font-medium transition-colors duration-200',
+                    'block py-3 px-4 text-sm font-medium rounded-lg transition-all duration-200',
                     activeSection === link.id
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-foreground'
+                      ? 'text-primary-foreground bg-primary'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
                   )}
                 >
                   {link.name}
@@ -122,6 +134,17 @@ export default function Header() {
               </li>
             ))}
           </ul>
+          <a
+            href="#contact"
+            onClick={(e) => handleScroll(e, 'contact')}
+            className="mt-4 flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-3 text-sm font-medium hover:bg-primary/90 transition-colors"
+          >
+            Get in Touch
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 17L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
+          </a>
         </div>
       </div>
     </header>
