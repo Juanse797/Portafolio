@@ -2,19 +2,22 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
-
-const navLinks = [
-  { name: 'Home', id: 'home' },
-  { name: 'About', id: 'about' },
-  { name: 'Projects', id: 'projects' },
-  { name: 'Skills', id: 'skills' },
-  { name: 'Contact', id: 'contact' },
-];
+import { LanguageSwitcher } from './language-switcher';
+import { useLanguage } from '@/i18n/language-context';
 
 export default function Header() {
+  const { t } = useLanguage();
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navLinks = [
+    { name: t.nav.home, id: 'home' },
+    { name: t.nav.about, id: 'about' },
+    { name: t.nav.projects, id: 'projects' },
+    { name: t.nav.skills, id: 'skills' },
+    { name: t.nav.contact, id: 'contact' },
+  ];
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
@@ -87,6 +90,11 @@ export default function Header() {
           </div>
         </nav>
 
+        {/* Right: Language switcher */}
+        <div className="hidden md:block">
+          <LanguageSwitcher />
+        </div>
+
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -123,7 +131,10 @@ export default function Header() {
               </li>
             ))}
           </ul>
-
+          {/* Mobile language switcher */}
+          <div className="mt-4 pt-4 border-t border-border/10 flex justify-center">
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
     </header>

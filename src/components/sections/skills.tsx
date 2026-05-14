@@ -10,6 +10,7 @@ import {
   MatplotlibIcon,
   DockerIcon,
 } from '../icons';
+import { useLanguage } from '@/i18n/language-context';
 
 const skillsList = [
   { name: 'Python', icon: PythonIcon },
@@ -22,6 +23,7 @@ const skillsList = [
 ];
 
 export default function SkillsSection() {
+  const { t } = useLanguage();
   return (
     <section id="skills" className="relative py-14 sm:py-20">
       <div className="container mx-auto px-4">
@@ -29,13 +31,13 @@ export default function SkillsSection() {
         <div className="max-w-3xl mx-auto text-center mb-10">
           <ScrollReveal direction="down">
             <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-sm font-medium text-primary mb-6">
-              Tech Stack
+              {t.skills.badge}
             </span>
           </ScrollReveal>
           <ScrollReveal delay={150} direction="fade" duration={900}>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-balance">
-              Tools & technologies I{' '}
-              <span className="text-primary">work with</span>
+              {t.skills.title}{' '}
+              <span className="text-primary">{t.skills.titleHighlight}</span>
             </h2>
           </ScrollReveal>
         </div>

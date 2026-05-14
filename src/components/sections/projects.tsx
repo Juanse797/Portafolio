@@ -3,8 +3,10 @@
 import { projects } from '@/data/projects';
 import ProjectCard from '../project-card';
 import { ScrollReveal } from '../scroll-reveal';
+import { useLanguage } from '@/i18n/language-context';
 
 export default function ProjectsSection() {
+  const { t } = useLanguage();
   return (
     <section id="projects" className="relative py-14 sm:py-20">
       <div className="container mx-auto px-4">
@@ -12,18 +14,18 @@ export default function ProjectsSection() {
         <div className="max-w-3xl mx-auto text-center mb-10">
           <ScrollReveal direction="down">
             <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-sm font-medium text-primary mb-6">
-              Portfolio
+              {t.projects.badge}
             </span>
           </ScrollReveal>
           <ScrollReveal delay={150} direction="fade" duration={900}>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-balance">
-              Featured{' '}
-              <span className="text-primary">projects</span>
+              {t.projects.title}{' '}
+              <span className="text-primary">{t.projects.titleHighlight}</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={300} direction="up">
             <p className="mt-4 text-lg text-muted-foreground">
-              A selection of my most impactful work in machine learning and data science.
+              {t.projects.description}
             </p>
           </ScrollReveal>
         </div>

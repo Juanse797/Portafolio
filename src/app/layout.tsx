@@ -6,6 +6,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import AnimatedBackground from "@/components/animated-background";
 import { siteConfig } from '@/config/site';
+import { LanguageProvider } from '@/i18n/language-context';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -67,11 +68,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${inter.variable} antialiased`}>
       <body className="bg-background text-foreground font-sans">
-        <AnimatedBackground />
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <Toaster />
+        <LanguageProvider>
+          <AnimatedBackground />
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <Toaster />
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -3,29 +3,31 @@
 import { Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
 import { ScrollReveal } from '../scroll-reveal';
 import { siteConfig } from '@/config/site';
-
-const socialLinks = [
-  {
-    name: 'LinkedIn',
-    icon: Linkedin,
-    url: siteConfig.links.linkedin,
-    label: 'Connect on LinkedIn',
-  },
-  {
-    name: 'GitHub',
-    icon: Github,
-    url: siteConfig.links.github,
-    label: 'View my GitHub',
-  },
-  {
-    name: 'Email',
-    icon: Mail,
-    url: siteConfig.links.email,
-    label: 'Send me an email',
-  },
-];
+import { useLanguage } from '@/i18n/language-context';
 
 export default function ContactSection() {
+  const { t } = useLanguage();
+
+  const socialLinks = [
+    {
+      name: 'LinkedIn',
+      icon: Linkedin,
+      url: siteConfig.links.linkedin,
+      label: t.contact.links.linkedin,
+    },
+    {
+      name: 'GitHub',
+      icon: Github,
+      url: siteConfig.links.github,
+      label: t.contact.links.github,
+    },
+    {
+      name: 'Email',
+      icon: Mail,
+      url: siteConfig.links.email,
+      label: t.contact.links.email,
+    },
+  ];
   return (
     <section id="contact" className="relative py-14 sm:py-20">
       <div className="container mx-auto px-4 max-w-3xl">
@@ -33,18 +35,18 @@ export default function ContactSection() {
         <div className="text-center mb-10">
           <ScrollReveal direction="down">
             <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-sm font-medium text-primary mb-6">
-              Get in Touch
+              {t.contact.badge}
             </span>
           </ScrollReveal>
           <ScrollReveal delay={150} direction="fade" duration={900}>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-balance">
-              {"Let's build something"}{' '}
-              <span className="text-primary">together</span>
+              {t.contact.title}{' '}
+              <span className="text-primary">{t.contact.titleHighlight}</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={300} direction="up">
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              {"I'm always open to new challenges and opportunities. If you'd like to learn more about my work or discuss potential collaborations, feel free to reach out."}
+              {t.contact.description}
             </p>
           </ScrollReveal>
         </div>

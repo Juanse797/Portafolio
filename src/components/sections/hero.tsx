@@ -5,6 +5,7 @@ import { ArrowDown, Download, Sparkles } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/i18n/language-context';
 
 function AnimatedGridBackground() {
   return (
@@ -45,6 +46,7 @@ function FloatingParticles() {
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
@@ -86,7 +88,7 @@ export default function HeroSection() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             )}
           >
-            <span className="text-foreground">{'Hi, I\'m'}</span>
+            <span className="text-foreground">{t.hero.greeting}</span>
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-400 to-primary">
               {siteConfig.name.split(' ')[0]}
@@ -103,8 +105,7 @@ export default function HeroSection() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             )}
           >
-            Crafting intelligent solutions from data, one model at a time.
-            Building robust ML systems that transform raw data into actionable insights.
+            {t.hero.description}
           </p>
 
           {/* CTA buttons */}
@@ -122,7 +123,7 @@ export default function HeroSection() {
               <a href="#projects" onClick={handleScrollToProjects}>
                 <span className="relative z-10 flex items-center gap-2">
                   <ArrowDown className="w-5 h-5 transition-transform group-hover:translate-y-0.5" />
-                  View Projects
+                  {t.hero.viewProjects}
                 </span>
               </a>
             </Button>
@@ -134,7 +135,7 @@ export default function HeroSection() {
             >
               <a href="/cv.pdf" download={`${siteConfig.name.replace(' ', '_')}_CV.pdf`}>
                 <Download className="mr-2 h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-                Download CV
+                {t.hero.downloadCV}
               </a>
             </Button>
           </div>
@@ -147,9 +148,9 @@ export default function HeroSection() {
             )}
           >
             {[
-              { value: 'ML', label: 'Engineer' },
-              { value: 'AI', label: 'Solutions' },
-              { value: 'Data', label: 'Driven' },
+              { value: t.hero.stats.ml.value, label: t.hero.stats.ml.label },
+              { value: t.hero.stats.ai.value, label: t.hero.stats.ai.label },
+              { value: t.hero.stats.data.value, label: t.hero.stats.data.label },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-primary">{stat.value}</div>
